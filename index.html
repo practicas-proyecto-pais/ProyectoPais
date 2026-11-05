@@ -77,9 +77,10 @@ nav a{
   color:var(--muted);
   transition:all .2s ease;
   cursor:pointer;
+  user-select:none;
 }
 nav a:hover{color:var(--ink)}
-nav a[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
+nav a.nav-active{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
 @media(max-width:680px){
   .bar{height:auto;flex-wrap:wrap;padding:12px 0}
   nav{width:100%;overflow-x:auto;margin-top:8px}
@@ -122,7 +123,7 @@ h1{
 }
 .banner span{width:6px;height:6px;border-radius:50%;background:var(--accent)}
 
-/* PÁGINAS */
+/* GESTIÓN DE PÁGINAS */
 .page{display:none}
 .page.on{display:block;animation:fade .2s ease both}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
@@ -184,13 +185,13 @@ h1{
 .tab-pane{display:none}
 .tab-pane.active{display:block;animation:fade .2s ease both}
 
-/* GRÁFICO */
+/* GRÁFICO SVG */
 svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .readout{display:flex;gap:16px;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .readout b{font-family:"Instrument Serif",Georgia,serif;font-size:38px;line-height:1;color:var(--ink);font-weight:400}
 .readout span{font-size:13px;color:var(--muted);font-weight:500}
 
-/* PESTAÑAS CONTENIDO */
+/* PESTAÑA HALLAZGO */
 .insight-box{
   background:var(--accent-light);
   border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);
@@ -202,12 +203,14 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .insight-box h3{margin:0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
 .insight-box p{margin:0;font-size:16px;line-height:1.5;color:var(--ink);font-weight:500}
 
+/* PESTAÑA FICHA */
 .ficha-grid{display:grid;gap:16px}
 .ficha-row{display:grid;gap:4px;border-bottom:1px solid var(--line);padding-bottom:12px}
 .ficha-row:last-child{border-bottom:none;padding-bottom:0}
 .ficha-row span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
 .ficha-row p{margin:0;font-size:14px;color:var(--ink);line-height:1.5}
 
+/* PESTAÑA FUENTE */
 .src-pane{display:grid;gap:18px}
 .src-group span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin-bottom:6px}
 .src-group a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:4px}
@@ -327,48 +330,63 @@ footer p{margin:0;line-height:1.6}
 
 <header class="top">
   <div class="wrap bar">
-    <a class="brand" href="#inicio"><span class="brand-dot"></span>Proyecto País</a>
+    <a class="brand nav-link" data-go="inicio"><span class="brand-dot"></span>Proyecto País</a>
     <nav aria-label="Secciones">
-      <a href="#inicio">Inicio</a>
-      <a href="#cultura">Cultura</a>
-      <a href="#territorio">Territorio</a>
-      <a href="#exportaciones">Exportaciones</a>
+      <a class="nav-link nav-active" data-go="inicio">Inicio</a>
+      <a class="nav-link" data-go="cultura">Cultura</a>
+      <a class="nav-link" data-go="territorio">Territorio</a>
+      <a class="nav-link" data-go="exportaciones">Exportaciones</a>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
 
-  <!-- INICIO -->
-  <div class="page on" id="p-inicio">
-    <section class="hero">
+  <!-- VISTA: INICIO -->
+  <section class="page on" id="p-inicio">
+    <div class="hero">
       <div class="eyebrow">Proyecto País</div>
       <h1>Chile, descrito con datos y fuentes verificadas</h1>
       <p class="lead">Una plataforma para explorar cómo es el país: su cultura, su territorio y lo que exporta, siempre con la fuente a la vista.</p>
       <div class="banner"><span></span> Versión de maqueta: datos y citas de ejemplo</div>
-    </section>
-    <section class="tiles" aria-label="Secciones de la plataforma">
-      <a class="card tile" href="#cultura"><small>Disponible</small><h3>Cultura</h3><p>Cinco dimensiones culturales con sus series de datos y citas de fuentes verificadas.</p><span>Explorar →</span></a>
-      <a class="card tile" href="#territorio"><small>En construcción</small><h3>Territorio</h3><p>Geografía, regiones y el vínculo de las personas con el lugar.</p><span>Ver →</span></a>
-      <a class="card tile" href="#exportaciones"><small>En construcción</small><h3>Exportaciones</h3><p>Qué vende Chile al mundo y cómo ha cambiado en el tiempo.</p><span>Ver →</span></a>
-    </section>
-    <section class="how" aria-label="Cómo funciona">
+    </div>
+    <div class="tiles" aria-label="Secciones de la plataforma">
+      <div class="card tile nav-link" data-go="cultura">
+        <small>Disponible</small>
+        <h3>Cultura</h3>
+        <p>Cinco dimensiones culturales con sus series de datos y citas de fuentes verificadas.</p>
+        <span>Explorar →</span>
+      </div>
+      <div class="card tile nav-link" data-go="territorio">
+        <small>En construcción</small>
+        <h3>Territorio</h3>
+        <p>Geografía, regiones y el vínculo de las personas con el lugar.</p>
+        <span>Ver →</span>
+      </div>
+      <div class="card tile nav-link" data-go="exportaciones">
+        <small>En construcción</small>
+        <h3>Exportaciones</h3>
+        <p>Qué vende Chile al mundo y cómo ha cambiado en el tiempo.</p>
+        <span>Ver →</span>
+      </div>
+    </div>
+    <div class="how" aria-label="Cómo funciona">
       <div><b>Datos</b><p>Series con su definición, escala, año y fuente.</p></div>
       <div><b>Citas</b><p>Fragmentos textuales breves con autor y enlace al documento original.</p></div>
       <div><b>Fuentes verificadas</b><p>Solo instituciones y publicaciones oficiales con enlace auditado.</p></div>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <!-- CULTURA -->
-  <div class="page" id="p-cultura">
-    <section class="hero">
+  <!-- VISTA: CULTURA -->
+  <section class="page" id="p-cultura">
+    <div class="hero">
       <div class="eyebrow">Cultura</div>
       <h1>La cultura chilena en cinco dimensiones</h1>
       <p class="lead">Cinco dimensiones culturales, sus series de datos y las voces que las describen, siempre con la fuente a la vista.</p>
       <div class="banner"><span></span> Versión de maqueta: datos y citas de ejemplo</div>
-    </section>
+    </div>
 
-    <section class="explorer" aria-label="Explorador de dimensiones culturales">
+    <div class="explorer" aria-label="Explorador de dimensiones culturales">
       <div class="card chart">
         <div class="chart-head">
           <h2 id="ct"></h2>
@@ -377,34 +395,30 @@ footer p{margin:0;line-height:1.6}
         <p class="desc" id="cd"></p>
 
         <!-- Segmented Tabs -->
-        <nav class="tabs-nav" role="tablist" aria-label="Vistas del indicador">
-          <button class="tab-btn active" role="tab" data-tab="grafico" aria-selected="true">Gráfico</button>
-          <button class="tab-btn" role="tab" data-tab="hallazgo" aria-selected="false">Hallazgo clave</button>
-          <button class="tab-btn" role="tab" data-tab="ficha" aria-selected="false">Ficha técnica</button>
-          <button class="tab-btn" role="tab" data-tab="fuente" aria-selected="false">Fuente y datos</button>
-        </nav>
-
-        <!-- Pestaña 1: Gráfico -->
-        <div class="tab-pane active" id="pane-grafico" role="tabpanel">
-          <svg id="svg" viewBox="0 0 640 330" role="img" aria-labelledby="ct"></svg>
-          <div class="readout" aria-live="polite"><b id="rv"></b><span id="ry"></span></div>
+        <div class="tabs-nav" role="tablist">
+          <button class="tab-btn active" data-tab="grafico">Gráfico</button>
+          <button class="tab-btn" data-tab="hallazgo">Hallazgo clave</button>
+          <button class="tab-btn" data-tab="ficha">Ficha técnica</button>
+          <button class="tab-btn" data-tab="fuente">Fuente y datos</button>
         </div>
 
-        <!-- Pestaña 2: Hallazgo clave -->
-        <div class="tab-pane" id="pane-hallazgo" role="tabpanel">
+        <div class="tab-pane active" id="pane-grafico">
+          <svg id="svg" viewBox="0 0 640 330" role="img" aria-labelledby="ct"></svg>
+          <div class="readout"><b id="rv"></b><span id="ry"></span></div>
+        </div>
+
+        <div class="tab-pane" id="pane-hallazgo">
           <div class="insight-box">
             <h3>Diagnóstico temporal</h3>
             <p id="ci"></p>
           </div>
         </div>
 
-        <!-- Pestaña 3: Ficha técnica -->
-        <div class="tab-pane" id="pane-ficha" role="tabpanel">
+        <div class="tab-pane" id="pane-ficha">
           <div class="ficha-grid" id="c-ficha"></div>
         </div>
 
-        <!-- Pestaña 4: Fuente -->
-        <div class="tab-pane" id="pane-fuente" role="tabpanel">
+        <div class="tab-pane" id="pane-fuente">
           <div class="src-pane">
             <div class="src-group">
               <span>Fuente primaria</span>
@@ -419,29 +433,29 @@ footer p{margin:0;line-height:1.6}
         </div>
       </div>
 
-      <div class="dims" id="dims" role="group" aria-label="Dimensiones y sus fuentes"></div>
-    </section>
-  </div>
+      <div class="dims" id="dims" role="group"></div>
+    </div>
+  </section>
 
-  <!-- TERRITORIO -->
-  <div class="page" id="p-territorio">
-    <section class="hero">
+  <!-- VISTA: TERRITORIO -->
+  <section class="page" id="p-territorio">
+    <div class="hero">
       <div class="eyebrow">Territorio</div>
       <h1>El territorio chileno</h1>
       <p class="lead">Cómo se distribuye y se habita el país: geografía, regiones y recursos.</p>
-    </section>
+    </div>
     <div class="card soon"><h2>En construcción</h2><p>Esta sección se desarrollará después de Cultura.</p></div>
-  </div>
+  </section>
 
-  <!-- EXPORTACIONES -->
-  <div class="page" id="p-exportaciones">
-    <section class="hero">
+  <!-- VISTA: EXPORTACIONES -->
+  <section class="page" id="p-exportaciones">
+    <div class="hero">
       <div class="eyebrow">Exportaciones</div>
       <h1>Lo que Chile vende al mundo</h1>
       <p class="lead">Qué productos se exportan, a quién y cómo ha cambiado en el tiempo.</p>
-    </section>
+    </div>
     <div class="card soon"><h2>En construcción</h2><p>Esta sección se desarrollará después de Cultura.</p></div>
-  </div>
+  </section>
 
 </main>
 
@@ -594,10 +608,9 @@ if ($("btn-csv")) {
 // CONTROL DE PESTAÑAS (GRÁFICO, HALLAZGO, ETC.)
 document.querySelectorAll(".tab-btn").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    document.querySelectorAll(".tab-btn").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-selected","false")});
+    document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));
     document.querySelectorAll(".tab-pane").forEach(p=>p.classList.remove("active"));
     btn.classList.add("active");
-    btn.setAttribute("aria-selected","true");
     const target = $("pane-"+btn.dataset.tab);
     if (target) target.classList.add("active");
     if(btn.dataset.tab==="grafico") drawChart();
@@ -639,36 +652,35 @@ if ($("dims")) {
     const b=e.target.closest(".dim");if(!b)return;
     const i=+b.dataset.i;
     open=i===cur?!open:true;cur=i;render();
-    history.replaceState(null,"","#cultura"+(open?"/"+DIMS[cur].id:""));
+    location.hash = "cultura/" + DIMS[cur].id;
     const focusBtn = $("dims").querySelector(`[data-i="${i}"]`);
     if (focusBtn) focusBtn.focus();
   });
 }
 
-// SISTEMA DE NAVEGACIÓN ENTRE PÁGINAS (INICIO, CULTURA, TERRITORIO, EXPORTACIONES)
+// SISTEMA DIRECTO DE NAVEGACIÓN ENTRE PÁGINAS
 const PAGES=["inicio","cultura","territorio","exportaciones"];
 
-function navigateTo(targetPage, subDim){
-  const p = PAGES.includes(targetPage) ? targetPage : "inicio";
+function showPage(pageId, subDim){
+  const target = PAGES.includes(pageId) ? pageId : "inicio";
 
-  // Mostrar la página correcta y ocultar las demás
-  PAGES.forEach(n => {
-    const el = $("p-" + n);
-    if (el) el.classList.toggle("on", n === p);
+  // 1. Mostrar la página correspondiente y esconder las demás
+  PAGES.forEach(p => {
+    const el = $("p-" + p);
+    if (el) {
+      if (p === target) el.classList.add("on");
+      else el.classList.remove("on");
+    }
   });
 
-  // Marcar el botón activo del menú
-  document.querySelectorAll("nav a").forEach(a => {
-    const href = a.getAttribute("href") || "";
-    if (href === "#" + p) a.setAttribute("aria-current", "page");
-    else a.removeAttribute("aria-current");
+  // 2. Marcar el botón activo del menú superior
+  document.querySelectorAll("nav .nav-link").forEach(btn => {
+    if (btn.dataset.go === target) btn.classList.add("nav-active");
+    else btn.classList.remove("nav-active");
   });
 
-  // Título de la pestaña
-  document.title = (p === "inicio" ? "Inicio · " : p[0].toUpperCase() + p.slice(1) + " · ") + "Proyecto País";
-
-  // Si va a cultura, asegurarse de renderizar y enfocar si corresponde
-  if (p === "cultura") {
+  // 3. Si es cultura, renderizar
+  if (target === "cultura") {
     if (subDim) {
       const idx = DIMS.findIndex(x => x.id === subDim);
       if (idx >= 0) { cur = idx; open = true; }
@@ -676,34 +688,31 @@ function navigateTo(targetPage, subDim){
     render();
   }
 
+  // 4. Actualizar título y scroll
+  document.title = (target === "inicio" ? "Inicio · " : target[0].toUpperCase() + target.slice(1) + " · ") + "Proyecto País";
   window.scrollTo(0, 0);
 }
 
-function handleRoute(){
-  const rawHash = (location.hash || "").replace(/^#/, "");
-  const [page, sub] = rawHash.split("/");
-  navigateTo(page || "inicio", sub);
-}
-
-// Interceptar clics en enlaces de navegación interna (#inicio, #cultura, etc.)
-document.addEventListener("click", e => {
-  const link = e.target.closest("a");
-  if (!link) return;
-  const href = link.getAttribute("href");
-  if (href && href.startsWith("#")) {
-    e.preventDefault();
-    const clean = href.replace(/^#/, "");
-    const [page, sub] = clean.split("/");
-    location.hash = clean;
-    navigateTo(page, sub);
-  }
+// ASIGNAR CLIC A TODOS LOS ELEMENTOS .nav-link (Menú, logo y tarjetas de inicio)
+document.querySelectorAll(".nav-link").forEach(el => {
+  el.addEventListener("click", () => {
+    const dest = el.dataset.go;
+    location.hash = dest;
+    showPage(dest);
+  });
 });
 
-window.addEventListener("hashchange", handleRoute);
+// ESCUCHAR CAMBIOS EN EL HASH (Por si se recarga con #cultura o se usa atrás/adelante)
+window.addEventListener("hashchange", () => {
+  const hash = (location.hash || "").replace(/^#/, "");
+  const [p, sub] = hash.split("/");
+  showPage(p || "inicio", sub);
+});
 
-// Inicialización garantizada
-render();
-handleRoute();
+// INICIALIZACIÓN
+const initialHash = (location.hash || "").replace(/^#/, "");
+const [initPage, initSub] = initialHash.split("/");
+showPage(initPage || "inicio", initSub);
 </script>
 </body>
 </html>
