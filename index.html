@@ -64,7 +64,7 @@ header.top{
   border-bottom:1px solid var(--line);
 }
 .bar{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:12px;font-size:16px}
+.brand{font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:12px;font-size:16px;cursor:pointer}
 .brand-dot{width:9px;height:9px;border-radius:50%;background:var(--accent)}
 nav{display:flex;gap:4px;background:color-mix(in srgb,var(--line) 40%,transparent);padding:4px;border-radius:99px}
 nav a{
@@ -76,6 +76,7 @@ nav a{
   border-radius:99px;
   color:var(--muted);
   transition:all .2s ease;
+  cursor:pointer;
 }
 nav a:hover{color:var(--ink)}
 nav a[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow-sm)}
@@ -121,12 +122,12 @@ h1{
 }
 .banner span{width:6px;height:6px;border-radius:50%;background:var(--accent)}
 
-/* Visibilidad de páginas */
+/* PÁGINAS */
 .page{display:none}
 .page.on{display:block;animation:fade .2s ease both}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-/* Explorador */
+/* EXPLORADOR */
 .explorer{
   display:grid;
   grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
@@ -148,7 +149,7 @@ h1{
 .chart .unit{font-size:12px;font-weight:500;color:var(--muted);background:var(--bg);padding:4px 10px;border-radius:99px}
 .chart p.desc{margin:0 0 20px;color:var(--muted);font-size:15px}
 
-/* Segmented Tabs */
+/* PESTAÑAS DENTRO DEL GRÁFICO */
 .tabs-nav{
   display:flex;
   gap:4px;
@@ -183,13 +184,13 @@ h1{
 .tab-pane{display:none}
 .tab-pane.active{display:block;animation:fade .2s ease both}
 
-/* Gráfico */
+/* GRÁFICO */
 svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .readout{display:flex;gap:16px;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .readout b{font-family:"Instrument Serif",Georgia,serif;font-size:38px;line-height:1;color:var(--ink);font-weight:400}
 .readout span{font-size:13px;color:var(--muted);font-weight:500}
 
-/* Contenido Pestañas */
+/* PESTAÑAS CONTENIDO */
 .insight-box{
   background:var(--accent-light);
   border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);
@@ -238,7 +239,7 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
 }
 .btn-csv:hover{opacity:.9;transform:translateY(-1px)}
 
-/* Dimensiones y Citas */
+/* LISTA DE DIMENSIONES */
 .dims{display:grid;gap:12px}
 .item{display:grid;gap:8px}
 .dim{
@@ -300,9 +301,9 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
   letter-spacing:.06em;
 }
 
-/* Home tiles */
+/* PORTADA */
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;padding:12px 0 32px}
-.tile{display:block;padding:28px;border-radius:var(--r);transition:all .2s ease}
+.tile{display:block;padding:28px;border-radius:var(--r);transition:all .2s ease;cursor:pointer}
 .tile:hover{transform:translateY(-3px);border-color:var(--line-strong)}
 .tile small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
 .tile h3{margin:8px 0;font-size:26px;font-family:"Instrument Serif",Georgia,serif;font-weight:400}
@@ -338,6 +339,7 @@ footer p{margin:0;line-height:1.6}
 
 <main class="wrap">
 
+  <!-- INICIO -->
   <div class="page on" id="p-inicio">
     <section class="hero">
       <div class="eyebrow">Proyecto País</div>
@@ -357,6 +359,7 @@ footer p{margin:0;line-height:1.6}
     </section>
   </div>
 
+  <!-- CULTURA -->
   <div class="page" id="p-cultura">
     <section class="hero">
       <div class="eyebrow">Cultura</div>
@@ -373,7 +376,7 @@ footer p{margin:0;line-height:1.6}
         </div>
         <p class="desc" id="cd"></p>
 
-        <!-- Segmented Control Tabs -->
+        <!-- Segmented Tabs -->
         <nav class="tabs-nav" role="tablist" aria-label="Vistas del indicador">
           <button class="tab-btn active" role="tab" data-tab="grafico" aria-selected="true">Gráfico</button>
           <button class="tab-btn" role="tab" data-tab="hallazgo" aria-selected="false">Hallazgo clave</button>
@@ -420,6 +423,7 @@ footer p{margin:0;line-height:1.6}
     </section>
   </div>
 
+  <!-- TERRITORIO -->
   <div class="page" id="p-territorio">
     <section class="hero">
       <div class="eyebrow">Territorio</div>
@@ -429,6 +433,7 @@ footer p{margin:0;line-height:1.6}
     <div class="card soon"><h2>En construcción</h2><p>Esta sección se desarrollará después de Cultura.</p></div>
   </div>
 
+  <!-- EXPORTACIONES -->
   <div class="page" id="p-exportaciones">
     <section class="hero">
       <div class="eyebrow">Exportaciones</div>
@@ -586,6 +591,7 @@ if ($("btn-csv")) {
   });
 }
 
+// CONTROL DE PESTAÑAS (GRÁFICO, HALLAZGO, ETC.)
 document.querySelectorAll(".tab-btn").forEach(btn=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".tab-btn").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-selected","false")});
@@ -639,37 +645,65 @@ if ($("dims")) {
   });
 }
 
+// SISTEMA DE NAVEGACIÓN ENTRE PÁGINAS (INICIO, CULTURA, TERRITORIO, EXPORTACIONES)
 const PAGES=["inicio","cultura","territorio","exportaciones"];
-function route(){
-  const hash = location.hash ? location.hash.slice(1) : "";
-  const [h,sub]=hash.split("/");
-  // Si no hay hash o la ruta no existe, abre por defecto 'inicio'
-  const p=PAGES.includes(h)?h:"inicio";
 
-  if(p==="cultura"){
-    const i=DIMS.findIndex(x=>x.id===sub);
-    if(i>=0&&(i!==cur||!open)){cur=i;open=true;render();}
-  }
+function navigateTo(targetPage, subDim){
+  const p = PAGES.includes(targetPage) ? targetPage : "inicio";
 
-  PAGES.forEach(n=>{
-    const pageEl = $("p-"+n);
-    if (pageEl) pageEl.classList.toggle("on", n===p);
+  // Mostrar la página correcta y ocultar las demás
+  PAGES.forEach(n => {
+    const el = $("p-" + n);
+    if (el) el.classList.toggle("on", n === p);
   });
 
-  document.querySelectorAll("nav a").forEach(a=>{
-    if(a.getAttribute("href")==="#"+p) a.setAttribute("aria-current","page");
+  // Marcar el botón activo del menú
+  document.querySelectorAll("nav a").forEach(a => {
+    const href = a.getAttribute("href") || "";
+    if (href === "#" + p) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
   });
 
-  document.title=(p==="inicio"?"Inicio · ":p[0].toUpperCase()+p.slice(1)+" · ")+"Proyecto País";
-  if(!sub) window.scrollTo(0,0);
+  // Título de la pestaña
+  document.title = (p === "inicio" ? "Inicio · " : p[0].toUpperCase() + p.slice(1) + " · ") + "Proyecto País";
+
+  // Si va a cultura, asegurarse de renderizar y enfocar si corresponde
+  if (p === "cultura") {
+    if (subDim) {
+      const idx = DIMS.findIndex(x => x.id === subDim);
+      if (idx >= 0) { cur = idx; open = true; }
+    }
+    render();
+  }
+
+  window.scrollTo(0, 0);
 }
 
-window.addEventListener("hashchange",route);
+function handleRoute(){
+  const rawHash = (location.hash || "").replace(/^#/, "");
+  const [page, sub] = rawHash.split("/");
+  navigateTo(page || "inicio", sub);
+}
 
-// Render inicial y ruteo
+// Interceptar clics en enlaces de navegación interna (#inicio, #cultura, etc.)
+document.addEventListener("click", e => {
+  const link = e.target.closest("a");
+  if (!link) return;
+  const href = link.getAttribute("href");
+  if (href && href.startsWith("#")) {
+    e.preventDefault();
+    const clean = href.replace(/^#/, "");
+    const [page, sub] = clean.split("/");
+    location.hash = clean;
+    navigateTo(page, sub);
+  }
+});
+
+window.addEventListener("hashchange", handleRoute);
+
+// Inicialización garantizada
 render();
-route();
+handleRoute();
 </script>
 </body>
 </html>
