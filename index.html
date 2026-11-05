@@ -58,7 +58,11 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .src{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
 .src a{color:var(--accent);text-underline-offset:3px}
 
-.dims{display:grid;gap:8px;margin-bottom:20px}
+.dims{display:grid;gap:10px}
+.item{display:grid;gap:8px}
+.panel{display:grid;gap:10px;padding:2px 0 6px 10px;border-left:2px solid var(--line);margin-left:6px;animation:in .25s ease both}
+.panel .cite{margin:0;padding:16px 18px;box-shadow:none}
+@media(prefers-reduced-motion:reduce){.panel{animation:none}}
 .dim{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px 18px;font:inherit;cursor:pointer;transition:border-color .15s,transform .15s}
 .dim:hover{border-color:var(--accent);transform:translateY(-1px)}
 .dim b{font-size:15px;letter-spacing:.06em;text-transform:uppercase}
@@ -152,13 +156,7 @@ footer p{margin:0}
         <div class="src" id="cs"></div>
       </div>
 
-      <div>
-        <div class="dims" id="dims" role="group" aria-label="Dimensiones"></div>
-        <div class="cites" aria-live="polite">
-          <h3>Lo que dicen las fuentes · <span id="cn"></span></h3>
-          <div id="cites"></div>
-        </div>
-      </div>
+      <div class="dims" id="dims" role="group" aria-label="Dimensiones y sus fuentes"></div>
     </section>
   </div>
 
@@ -202,41 +200,34 @@ const DIMS=[
   desc:"Confianza en las instituciones y entre las personas.",
   series:[38,35,31,28,26,30,24,22,27],
   source:{inst:"Por definir",title:"Serie de confianza",year:"",url:"#"},
-  cites:[
-   {text:"Fragmento breve y textual sobre confianza, copiado tal cual de la fuente.",who:"Autor/a o institución",pub:"Publicación sobre confianza",year:"2024",url:"#",example:true},
-   {text:"Segundo fragmento de ejemplo sobre confianza interpersonal.",who:"Otro autor/a",pub:"Otra publicación",year:"2023",url:"#",example:true}]},
+  cites:ex("la confianza")},
  {id:"desigualdad",name:"Desigualdad",unit:"Índice 0–100 · serie de ejemplo",
   desc:"Brechas de ingreso, de oportunidades y de reconocimiento.",
   series:[52,51,50,50,49,51,53,52,50],
   source:{inst:"Por definir",title:"Serie de desigualdad",year:"",url:"#"},
-  cites:[
-   {text:"Fragmento de ejemplo sobre desigualdad de ingresos y oportunidades.",who:"Autor/a o institución",pub:"Publicación sobre desigualdad",year:"2024",url:"#",example:true},
-   {text:"Fragmento de ejemplo sobre brechas de reconocimiento.",who:"Otro autor/a",pub:"Otra publicación",year:"2022",url:"#",example:true}]},
+  cites:ex("la desigualdad")},
  {id:"territorio",name:"Territorio",unit:"Índice 0–100 · serie de ejemplo",
   desc:"Vínculo de las personas con el lugar y su entorno.",
   series:[40,42,41,44,46,45,48,47,50],
   source:{inst:"Por definir",title:"Serie de territorio",year:"",url:"#"},
-  cites:[
-   {text:"Fragmento de ejemplo sobre arraigo y vínculo con el lugar.",who:"Autor/a o institución",pub:"Publicación sobre territorio",year:"2023",url:"#",example:true},
-   {text:"Fragmento de ejemplo sobre identidad regional.",who:"Otro autor/a",pub:"Otra publicación",year:"2021",url:"#",example:true}]},
+  cites:ex("el territorio")},
  {id:"sustentabilidad",name:"Sustentabilidad",unit:"Índice 0–100 · serie de ejemplo",
   desc:"Valores y prácticas frente al medio ambiente.",
   series:[30,33,35,38,41,40,44,47,52],
   source:{inst:"Por definir",title:"Serie de sustentabilidad",year:"",url:"#"},
-  cites:[
-   {text:"Fragmento de ejemplo sobre prácticas ambientales cotidianas.",who:"Autor/a o institución",pub:"Publicación sobre medio ambiente",year:"2024",url:"#",example:true},
-   {text:"Fragmento de ejemplo sobre valores frente al cambio climático.",who:"Otro autor/a",pub:"Otra publicación",year:"2023",url:"#",example:true}]},
+  cites:ex("la sustentabilidad")},
  {id:"colectivismo",name:"Colectivismo",unit:"Índice 0–100 · serie de ejemplo",
   desc:"Peso de lo colectivo frente a lo individual.",
   series:[45,44,46,45,47,50,49,52,51],
   source:{inst:"Por definir",title:"Serie de colectivismo",year:"",url:"#"},
-  cites:[
-   {text:"Fragmento de ejemplo sobre comunidad y vida colectiva.",who:"Autor/a o institución",pub:"Publicación sobre colectivismo",year:"2024",url:"#",example:true},
-   {text:"Fragmento de ejemplo sobre individualismo y cooperación.",who:"Otro autor/a",pub:"Otra publicación",year:"2022",url:"#",example:true}]}
+  cites:ex("el colectivismo")}
 ];
 /* ===================================================== */
 
-let cur=0;
+/* Ejemplos de relleno: reemplazar cada ex(...) por tus fuentes reales, mínimo 5, así:
+   cites:[{text:"Texto textual breve",who:"Autor/a o institución",pub:"Título",year:"2024",url:"https://…"}, …] */
+const ex=(t,n=5)=>Array.from({length:n},(_,k)=>({text:`Fragmento de ejemplo ${k+1} sobre ${t}, textual y breve.`,who:"Autor/a o institución",pub:"Título de la publicación",year:"2024",url:"#",example:true}));
+let cur=0,open=true;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const link=(u,t)=>u&&u!=="#"?`<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`:t;
@@ -266,24 +257,28 @@ $("svg").addEventListener("pointerleave",()=>drawChart());
 
 function render(){
   const d=DIMS[cur],s=d.source;
-  $("ct").textContent=d.name;$("cd").textContent=d.desc;$("cu").textContent=d.unit;$("cn").textContent=d.name;
+  $("ct").textContent=d.name;$("cd").textContent=d.desc;$("cu").textContent=d.unit;
   const label=[s.inst,s.title,s.year].filter(Boolean).join(" · ");
   $("cs").innerHTML="Fuente de la serie: "+link(s.url,esc(label||"por definir"))+(s.url&&s.url!=="#"?" ↗":"");
   drawChart();
-  $("dims").innerHTML="";
-  DIMS.forEach((x,i)=>{
-    const b=document.createElement("button");b.className="dim";b.setAttribute("aria-pressed",i===cur);
-    b.innerHTML=`<div><b>${esc(x.name)}</b><span>${esc(x.desc)}</span></div><em>${x.series[x.series.length-1]}</em>`;
-    b.onclick=()=>{cur=i;render();history.replaceState(null,"","#cultura/"+x.id)};
-    $("dims").appendChild(b);
-  });
-  $("cites").innerHTML=d.cites.map(c=>`<article class="card cite"><blockquote>«${esc(c.text)}»</blockquote><div class="who">${esc(c.who)}${c.example?'<span class="tag">ejemplo</span>':""}</div><div class="where">${esc(c.pub)}, ${esc(c.year)} · ${link(c.url,"Ver fuente ↗")}</div></article>`).join("");
+  $("dims").innerHTML=DIMS.map((x,i)=>{
+    const on=i===cur&&open;
+    return `<div class="item"><button class="dim" data-i="${i}" aria-pressed="${i===cur}" aria-expanded="${on}" aria-controls="pn-${x.id}"><div><b>${esc(x.name)}</b><span>${esc(x.desc)}</span></div><em>${x.cites.length} fuentes ${on?"▴":"▾"}</em></button>`+
+    (on?`<div class="panel" id="pn-${x.id}" role="region" aria-label="Fuentes de ${esc(x.name)}">`+x.cites.map(c=>`<article class="card cite"><blockquote>«${esc(c.text)}»</blockquote><div class="who">${esc(c.who)}${c.example?'<span class="tag">ejemplo</span>':""}</div><div class="where">${esc(c.pub)}, ${esc(c.year)} · ${link(c.url,"Ver fuente ↗")}</div></article>`).join("")+`</div>`:"")+`</div>`;
+  }).join("");
 }
+$("dims").addEventListener("click",e=>{
+  const b=e.target.closest(".dim");if(!b)return;
+  const i=+b.dataset.i;
+  open=i===cur?!open:true;cur=i;render();
+  history.replaceState(null,"","#cultura"+(open?"/"+DIMS[cur].id:""));
+  $("dims").querySelector(`[data-i="${i}"]`).focus();
+});
 
 const PAGES=["inicio","cultura","territorio","exportaciones"];
 function route(){
   const [h,sub]=location.hash.slice(1).split("/"),p=PAGES.includes(h)?h:"inicio";
-  if(p==="cultura"){const i=DIMS.findIndex(x=>x.id===sub);if(i>=0&&i!==cur){cur=i;render()}}
+  if(p==="cultura"){const i=DIMS.findIndex(x=>x.id===sub);if(i>=0&&(i!==cur||!open)){cur=i;open=true;render()}}
   PAGES.forEach(n=>$("p-"+n).classList.toggle("on",n===p));
   document.querySelectorAll("nav a").forEach(a=>{
     if(a.getAttribute("href")==="#"+p)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
