@@ -44,7 +44,19 @@ h1{font-size:clamp(38px,6.5vw,68px);line-height:1.02;letter-spacing:-.02em;margi
 .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:620px;margin:0}
 .banner{display:inline-flex;gap:8px;align-items:center;margin-top:24px;padding:6px 14px;border-radius:99px;background:var(--accent-soft);font-size:13px}
 
-.explorer{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;padding:24px 0 56px;align-items:start}
+.ovw{padding:0 0 8px}
+.ovw h2{margin:0 0 4px;font-size:22px;letter-spacing:-.01em}
+.ovw p{margin:0 0 16px;color:var(--muted);font-size:15px;max-width:640px}
+.ovg{display:grid;grid-template-columns:repeat(auto-fill,minmax(176px,1fr));gap:12px}
+.ov{display:grid;gap:6px;align-content:start;text-align:left;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .15s}
+.ov:hover{border-color:var(--accent)}
+.ov[aria-current="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.ov .on{font-size:13px;font-weight:700;line-height:1.25;min-height:2.5em}
+.ov .vv{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.ov b{font-size:30px;letter-spacing:-.02em;line-height:1}
+.ov small{font-size:12px;color:var(--muted)}
+
+.explorer{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;padding:32px 0 56px;align-items:start;scroll-margin-top:64px}
 @media(max-width:860px){.explorer{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
 .chart{padding:24px}
@@ -157,10 +169,16 @@ footer p{margin:0}
       <div class="banner">Versión de maqueta: los datos y las citas son de ejemplo</div>
     </section>
 
-    <section class="explorer" aria-label="Explorador de dimensiones culturales">
+    <section class="ovw" aria-labelledby="oh">
+      <h2 id="oh">Las once dimensiones de un vistazo</h2>
+      <p id="ovd"></p>
+      <div class="ovg" id="ovg" role="group" aria-label="Resumen de las once dimensiones"></div>
+    </section>
+
+    <section class="explorer" id="ex" aria-label="Explorador de dimensiones culturales">
       <div class="card chart">
         <div class="chart-head">
-          <h2 id="ct"></h2>
+          <h2 id="ct" tabindex="-1"></h2>
           <span class="unit" id="cu"></span>
         </div>
         <p class="desc" id="cd"></p>
@@ -214,13 +232,8 @@ footer p{margin:0}
 </footer>
 
 <script>
-/* ===== DATOS (reemplazar luego por datos reales) =====
-   Cada dimensión trae su propia serie, fuente de la serie y citas.
-   source: {inst, title, year, url}  → url "#" = aún sin enlace
-   cites:  [{text, who, pub, year, url}] → texto textual y breve
-   example:true muestra la etiqueta "ejemplo" (quitar con datos reales) */
-/* Relleno de ejemplo: reemplazar cada ex(...) por tus fuentes reales (mínimo 5):
-   cites:[{text:"Texto textual breve",who:"Autor/a o institución",pub:"Título",year:"2024",url:"https://…"}, …] */
+/* ===== DATOS DE EJEMPLO (reemplazar por datos reales) =====
+   source: {inst,title,year,url} · cites: [{text,who,pub,year,url}] · example:true muestra la etiqueta "ejemplo" */
 const ex=(t,n=5)=>Array.from({length:n},(_,k)=>({text:`Fragmento de ejemplo ${k+1} sobre ${t}, textual y breve.`,who:"Autor/a o institución",pub:"Título de la publicación",year:"2024",url:"#",example:true}));
 const mk=(id,name,desc,series)=>({id,name,desc,unit:"Índice 0–100 · serie de ejemplo",series,source:{inst:"Por definir",title:"Serie de "+name.toLowerCase(),year:"",url:"#"},cites:ex(name.toLowerCase())});
 const YEARS=[2012,2014,2016,2018,2020,2021,2022,2023,2024];
@@ -251,8 +264,6 @@ const DIMS=[
   source:{inst:"Por definir",title:"Serie de colectivismo",year:"",url:"#"},
   cites:ex("el colectivismo")}
 ];
-/* ===================================================== */
-
 DIMS.push(
  mk("pueblos","Pueblos originarios y lenguas","Presencia y vitalidad de las culturas y lenguas indígenas.",[28,29,31,33,35,36,38,40,41]),
  mk("religiosidad","Religiosidad","Creencias, prácticas y pertenencia religiosa.",[62,60,57,54,50,49,47,45,43]),
@@ -260,7 +271,6 @@ DIMS.push(
  mk("patrimonio","Patrimonio","Valoración y cuidado del patrimonio material e inmaterial.",[44,45,45,47,48,48,50,51,52]),
  mk("gastronomia","Gastronomía","Cocina, alimentos y prácticas de comer en común.",[55,56,56,58,57,59,60,60,61]),
  mk("deporte","Deporte","Práctica y afición deportiva en la vida cotidiana.",[36,38,39,41,35,38,42,44,45]));
-/* Ejemplos: desgloses, hitos y relaciones (reemplazar con datos reales y sus fuentes) */
 const GROUPS=[["Total",0],["18–29 años",5],["30–59 años",-1],["60+ años",-4],["Con educación superior",6],["Sin educación superior",-5]];
 const EVENTS={2020:"Pandemia de COVID-19",2022:"Plebiscito constitucional de salida"};
 const REL={confianza:["desigualdad","colectivismo"],desigualdad:["confianza","territorio"],territorio:["sustentabilidad","pueblos"],sustentabilidad:["territorio","colectivismo"],colectivismo:["confianza","participacion"],pueblos:["territorio","patrimonio"],religiosidad:["colectivismo","participacion"],participacion:["patrimonio","colectivismo"],patrimonio:["pueblos","gastronomia"],gastronomia:["patrimonio","territorio"],deporte:["participacion","colectivismo"]};
@@ -273,8 +283,9 @@ let cur=0,open=true,grp=0,cmp=-1;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const link=(u,t)=>u&&u!=="#"?`<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`:t;
-const W=640,H=340,P={l:40,r:20,t:16,b:34};
-const X=i=>P.l+i*(W-P.l-P.r)/(YEARS.length-1);
+const W=640,H=340,P={l:40,r:20,t:16,b:34},L=YEARS.length-1;
+const fr=i=>(YEARS[i]-YEARS[0])/(YEARS[L]-YEARS[0]); /* posición proporcional al año, no al índice */
+const X=i=>P.l+fr(i)*(W-P.l-P.r);
 const Yv=v=>H-P.b-v/100*(H-P.t-P.b);
 const sv=d=>d.series.map(v=>Math.max(0,Math.min(100,v+GROUPS[grp][1])));
 const key=(d,s)=>{const t=s[s.length-1]-s[0];return `${d.name}: ${t>0?"subió":t<0?"bajó":"se mantuvo"}${t?" "+Math.abs(t)+" puntos":""} entre ${YEARS[0]} y ${YEARS[YEARS.length-1]} (de ${s[0]} a ${s[s.length-1]}).`};
@@ -302,6 +313,22 @@ function nearest(e){
 $("svg").addEventListener("pointermove",e=>drawChart(nearest(e)));
 $("svg").addEventListener("pointerleave",()=>drawChart());
 
+/* Panorama: una miniatura por dimensión (escala fija 0–100, igual que el gráfico) */
+const SX=i=>2+fr(i)*116,SY=v=>38-v/100*36;
+function renderOv(){
+  $("ovd").textContent=`Valor en ${YEARS[L]} y cambio desde ${YEARS[0]}.${grp?" Desglose de ejemplo.":""} Elige una dimensión para ver su serie, su ficha y sus fuentes.`;
+  $("ovg").innerHTML=DIMS.map((d,i)=>{
+    const s=sv(d),t=s[L]-s[0],sg=t>0?"+"+t:t<0?"−"+Math.abs(t):"0",w=t>0?"subió":t<0?"bajó":"se mantuvo";
+    return `<button class="ov" data-o="${i}" aria-current="${i===cur}" aria-label="${esc(d.name)}: ${s[L]} en ${YEARS[L]}; ${w}${t?" "+Math.abs(t)+" puntos":""} desde ${YEARS[0]}"><span class="on">${esc(d.name)}</span><span class="vv"><b>${s[L]}</b><small>${sg} pts desde ${YEARS[0]}</small></span><svg viewBox="0 0 120 40" aria-hidden="true"><polyline points="${s.map((v,k)=>SX(k)+","+SY(v)).join(" ")}" fill="none" stroke="var(--chart)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${SX(L)}" cy="${SY(s[L])}" r="3" fill="var(--accent)"/></svg></button>`;
+  }).join("");
+}
+$("ovg").addEventListener("click",e=>{
+  const b=e.target.closest(".ov");if(!b)return;
+  cur=+b.dataset.o;open=true;render();
+  history.replaceState(null,"","#cultura/"+DIMS[cur].id);
+  $("ex").scrollIntoView();$("ct").focus({preventScroll:true});
+});
+
 function render(){
   const d=DIMS[cur],s=d.source,f=d.ficha;
   if(cmp===cur)cmp=-1;
@@ -314,7 +341,7 @@ function render(){
   $("cs").innerHTML="Fuente de la serie: "+link(s.url,esc(label||"por definir"))+(s.url&&s.url!=="#"?" ↗":"")+` · Consultada: ${esc(s.consulted)} · Enlace: ${esc(s.status)}`;
   const rl=REL[d.id]||[];
   $("cr").innerHTML=rl.length?"Dimensiones relacionadas: "+rl.map(id=>`<a href="#cultura/${id}">${esc(DIMS.find(x=>x.id===id).name)}</a>`).join(", "):"";
-  drawChart();
+  drawChart();renderOv();
   $("dims").innerHTML=DIMS.map((x,i)=>{
     const on=i===cur&&open;
     return `<div class="item"><button class="dim" data-i="${i}" aria-pressed="${i===cur}" aria-expanded="${on}" aria-controls="pn-${x.id}"><div><b>${esc(x.name)}</b><span>${esc(x.desc)}</span></div><em>${x.cites.length} fuentes ${on?"▴":"▾"}</em></button>`+
@@ -329,7 +356,6 @@ $("dims").addEventListener("click",e=>{
   $("dims").querySelector(`[data-i="${i}"]`).focus();
 });
 
-/* Controles: desglose, comparación, descarga y cita */
 $("gs").innerHTML=GROUPS.map((g,i)=>`<option value="${i}">${g[0]}${i?" (ejemplo)":""}</option>`).join("");
 $("gs").onchange=e=>{grp=+e.target.value;render()};
 $("cmp").onchange=e=>{cmp=+e.target.value;render()};
@@ -344,7 +370,6 @@ $("ci").onclick=()=>{
   setTimeout(()=>{$("ci").textContent="Citar esta página"},1800);
 };
 
-/* Glosario y lista global de fuentes */
 $("gl").innerHTML=GLOS.map(([t,x])=>`<dt>${esc(t)}</dt><dd>${esc(x)}</dd>`).join("");
 $("fd").innerHTML='<option value="">Todas</option>'+DIMS.map(d=>`<option value="${d.id}">${esc(d.name)}</option>`).join("");
 function renderAll(){
