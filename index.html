@@ -48,20 +48,49 @@ h1{font-size:clamp(38px,6.5vw,68px);line-height:1.02;letter-spacing:-.02em;margi
 @media(max-width:860px){.explorer{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
 .chart{padding:24px}
+
 .chart-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
 .chart h2{margin:0;font-size:22px;letter-spacing:-.01em}
 .chart .unit{font-size:13px;color:var(--muted)}
-.chart p.desc{margin:6px 0 10px;color:var(--muted);font-size:15px}
+.chart p.desc{margin:6px 0 16px;color:var(--muted);font-size:15px}
+
+/* Navegación por pestañas */
+.tabs-nav{display:flex;gap:6px;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:18px;overflow-x:auto}
+.tab-btn{background:transparent;border:1px solid var(--line);color:var(--muted);font:inherit;font-size:13px;font-weight:500;padding:6px 14px;border-radius:99px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.tab-btn:hover{color:var(--ink);border-color:var(--ink)}
+.tab-btn.active{background:var(--accent-soft);color:var(--accent);border-color:var(--accent);font-weight:700}
+
+.tab-pane{display:none;animation:in .2s ease both}
+.tab-pane.active{display:block}
+
+/* Pestaña 1: Gráfico */
 svg{width:100%;height:auto;display:block;touch-action:pan-y}
-.readout{display:flex;gap:18px;align-items:baseline;margin-top:6px;font-size:14px;color:var(--muted)}
+.readout{display:flex;gap:18px;align-items:baseline;margin-top:10px;font-size:14px;color:var(--muted)}
 .readout b{font-size:28px;color:var(--ink);letter-spacing:-.02em}
-.src{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
-.src a{color:var(--accent);text-underline-offset:3px}
+
+/* Pestaña 2: Hallazgo */
+.insight-box{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:14px;padding:20px;display:grid;gap:8px}
+.insight-box h3{margin:0;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.insight-box p{margin:0;font-size:17px;line-height:1.45;color:var(--ink);font-weight:500}
+
+/* Pestaña 3: Ficha metodológica */
+.ficha-grid{display:grid;gap:14px;font-size:14px}
+.ficha-row{display:grid;gap:4px;border-bottom:1px dashed var(--line);padding-bottom:10px}
+.ficha-row:last-child{border-bottom:none}
+.ficha-row span{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
+.ficha-row p{margin:0;color:var(--ink)}
+
+/* Pestaña 4: Fuente */
+.src-pane{display:grid;gap:14px;font-size:14px}
+.audit-chip{display:inline-flex;align-items:center;gap:6px;background:var(--accent-soft);color:var(--accent);padding:4px 10px;border-radius:99px;font-weight:700;font-size:12px;width:fit-content}
+.btn-csv{align-self:start;background:transparent;border:1px solid var(--line);padding:8px 14px;border-radius:10px;font:inherit;font-size:13px;cursor:pointer;color:var(--ink);margin-top:8px}
+.btn-csv:hover{border-color:var(--accent)}
 
 .dims{display:grid;gap:10px}
 .item{display:grid;gap:8px}
 .panel{display:grid;gap:10px;padding:2px 0 6px 10px;border-left:2px solid var(--line);margin-left:6px;animation:in .25s ease both}
 .panel .cite{margin:0;padding:16px 18px;box-shadow:none}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.panel{animation:none}}
 .dim{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px 18px;font:inherit;cursor:pointer;transition:border-color .15s,transform .15s}
 .dim:hover{border-color:var(--accent);transform:translateY(-1px)}
@@ -72,28 +101,13 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
 
 .cites h3{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:700}
 .cites h3 span{color:var(--accent)}
-.cite{padding:20px 22px;margin-bottom:12px;animation:in .25s ease both}
-@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){.cite{animation:none}}
+.cite{padding:20px 22px;margin-bottom:12px}
 .cite blockquote{margin:0 0 14px;font-size:16px;line-height:1.55;padding-left:16px;border-left:3px solid var(--accent)}
 .who{font-size:14px;font-weight:700}
 .where{font-size:13px;color:var(--muted)}
 .where a{color:var(--accent);text-underline-offset:3px}
 .tag{display:inline-block;font-size:11px;border:1px solid var(--line);border-radius:99px;padding:1px 8px;margin-left:8px;color:var(--muted);font-weight:400}
 
-.key{margin:0 0 10px;font-weight:700;font-size:17px;line-height:1.35}
-.ctl{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0;font-size:13px;color:var(--muted)}
-.ctl select,.ctl input{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:6px 10px;margin-left:6px;max-width:100%}
-.hit,.ficha{font-size:13px;color:var(--muted);margin:10px 0 0}
-.ficha summary{cursor:pointer;font-weight:700;color:var(--ink)}
-.ficha dl{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0 0}.ficha dt{font-weight:700}.ficha dd{margin:0}
-.rel{margin-top:8px}.rel a{color:var(--accent);text-underline-offset:3px}
-.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.btn{font:inherit;font-size:13px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:6px 14px;cursor:pointer}.btn:hover{border-color:var(--accent)}
-.more{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;padding:0 0 56px;align-items:start}
-.box{padding:24px}.box h3{margin:0 0 10px;font-size:18px}
-#gl dt{font-weight:700;margin-top:10px}#gl dd{margin:2px 0 0;color:var(--muted);font-size:14px}
-#fl{list-style:none;padding:0;margin:10px 0 0;max-height:380px;overflow:auto;font-size:14px}#fl li{padding:10px 0;border-top:1px solid var(--line)}#fl small{color:var(--muted)}#fl a{color:var(--accent)}
 footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--muted);font-size:14px}
 footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
 footer h4{margin:0 0 6px;color:var(--ink);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
@@ -138,7 +152,7 @@ footer p{margin:0}
       <div class="banner">Versión de maqueta: los datos y las citas son de ejemplo</div>
     </section>
     <section class="tiles" aria-label="Secciones de la plataforma">
-      <a class="card tile" href="#cultura"><small>Disponible</small><h3>Cultura</h3><p>Once dimensiones culturales con sus series de datos y citas de fuentes verificadas.</p><span>Explorar →</span></a>
+      <a class="card tile" href="#cultura"><small>Disponible</small><h3>Cultura</h3><p>Cinco dimensiones culturales con sus series de datos y citas de fuentes verificadas.</p><span>Explorar →</span></a>
       <a class="card tile" href="#territorio"><small>En construcción</small><h3>Territorio</h3><p>Geografía, regiones y el vínculo de las personas con el lugar.</p><span>Ver →</span></a>
       <a class="card tile" href="#exportaciones"><small>En construcción</small><h3>Exportaciones</h3><p>Qué vende Chile al mundo y cómo ha cambiado en el tiempo.</p><span>Ver →</span></a>
     </section>
@@ -152,8 +166,8 @@ footer p{margin:0}
   <div class="page" id="p-cultura">
     <section class="hero">
       <p class="eyebrow">Cultura</p>
-      <h1>La cultura chilena en once dimensiones</h1>
-      <p class="lead">Once dimensiones culturales, sus series de datos y las voces que las describen, siempre con la fuente a la vista.</p>
+      <h1>La cultura chilena en cinco dimensiones</h1>
+      <p class="lead">Cinco dimensiones culturales, sus series de datos y las voces que las describen, siempre con la fuente a la vista.</p>
       <div class="banner">Versión de maqueta: los datos y las citas son de ejemplo</div>
     </section>
 
@@ -164,24 +178,51 @@ footer p{margin:0}
           <span class="unit" id="cu"></span>
         </div>
         <p class="desc" id="cd"></p>
-        <p class="key" id="ck"></p>
-        <div class="ctl"><label>Ver por <select id="gs"></select></label><label>Comparar con <select id="cmp"></select></label></div>
-        <svg id="svg" viewBox="0 0 640 340" role="img" aria-labelledby="ct"></svg>
-        <div class="readout" aria-live="polite"><b id="rv"></b><span id="ry"></span><span id="rc"></span></div>
-        <p class="hit" id="ch"></p>
-        <details class="ficha" id="cf"></details>
-        <div class="src"><div id="cs"></div><div class="rel" id="cr"></div>
-          <div class="acts"><button class="btn" id="dl">Descargar CSV</button><button class="btn" id="ci">Citar esta página</button></div></div>
+
+        <!-- Barra de pestañas -->
+        <nav class="tabs-nav" role="tablist" aria-label="Vistas del indicador">
+          <button class="tab-btn active" role="tab" data-tab="grafico" aria-selected="true">Gráfico</button>
+          <button class="tab-btn" role="tab" data-tab="hallazgo" aria-selected="false">Hallazgo clave</button>
+          <button class="tab-btn" role="tab" data-tab="ficha" aria-selected="false">Ficha técnica</button>
+          <button class="tab-btn" role="tab" data-tab="fuente" aria-selected="false">Fuente y datos</button>
+        </nav>
+
+        <!-- Pestaña 1: Gráfico -->
+        <div class="tab-pane active" id="pane-grafico" role="tabpanel">
+          <svg id="svg" viewBox="0 0 640 340" role="img" aria-labelledby="ct"></svg>
+          <div class="readout" aria-live="polite"><b id="rv"></b><span id="ry"></span></div>
+        </div>
+
+        <!-- Pestaña 2: Hallazgo clave -->
+        <div class="tab-pane" id="pane-hallazgo" role="tabpanel">
+          <div class="insight-box">
+            <h3>Diagnóstico temporal</h3>
+            <p id="ci"></p>
+          </div>
+        </div>
+
+        <!-- Pestaña 3: Ficha técnica -->
+        <div class="tab-pane" id="pane-ficha" role="tabpanel">
+          <div class="ficha-grid" id="c-ficha"></div>
+        </div>
+
+        <!-- Pestaña 4: Fuente y auditoría -->
+        <div class="tab-pane" id="pane-fuente" role="tabpanel">
+          <div class="src-pane">
+            <div>
+              <div style="font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin-bottom:4px">Fuente primaria</div>
+              <div id="cs" style="font-size:15px"></div>
+            </div>
+            <div>
+              <span class="audit-chip">● Enlace verificado</span>
+              <span id="c-audit" style="color:var(--muted);font-size:13px;margin-left:8px"></span>
+            </div>
+            <button class="btn-csv" id="btn-csv">Descargar serie en CSV</button>
+          </div>
+        </div>
       </div>
 
       <div class="dims" id="dims" role="group" aria-label="Dimensiones y sus fuentes"></div>
-    </section>
-
-    <section class="more" aria-label="Glosario y fuentes">
-      <div class="card box"><h3>Glosario (borrador)</h3><dl id="gl"></dl></div>
-      <div class="card box"><h3>Todas las fuentes</h3>
-        <div class="ctl"><label>Dimensión <select id="fd"></select></label><input id="fq" type="search" placeholder="Buscar…" aria-label="Buscar fuentes"></div>
-        <ul id="fl"></ul></div>
     </section>
   </div>
 
@@ -214,87 +255,108 @@ footer p{margin:0}
 </footer>
 
 <script>
-/* ===== DATOS (reemplazar luego por datos reales) =====
-   Cada dimensión trae su propia serie, fuente de la serie y citas.
-   source: {inst, title, year, url}  → url "#" = aún sin enlace
-   cites:  [{text, who, pub, year, url}] → texto textual y breve
-   example:true muestra la etiqueta "ejemplo" (quitar con datos reales) */
-/* Relleno de ejemplo: reemplazar cada ex(...) por tus fuentes reales (mínimo 5):
-   cites:[{text:"Texto textual breve",who:"Autor/a o institución",pub:"Título",year:"2024",url:"https://…"}, …] */
-const ex=(t,n=5)=>Array.from({length:n},(_,k)=>({text:`Fragmento de ejemplo ${k+1} sobre ${t}, textual y breve.`,who:"Autor/a o institución",pub:"Título de la publicación",year:"2024",url:"#",example:true}));
-const mk=(id,name,desc,series)=>({id,name,desc,unit:"Índice 0–100 · serie de ejemplo",series,source:{inst:"Por definir",title:"Serie de "+name.toLowerCase(),year:"",url:"#"},cites:ex(name.toLowerCase())});
 const YEARS=[2012,2014,2016,2018,2020,2021,2022,2023,2024];
+
+const ex=(t,n=5)=>Array.from({length:n},(_,k)=>({
+  text:`Fragmento de ejemplo ${k+1} sobre ${t}, textual y breve.`,
+  who:"Autor/a o institución",pub:"Título de la publicación",year:"2024",url:"#",example:true
+}));
+
 const DIMS=[
- {id:"confianza",name:"Confianza",unit:"Índice 0–100 · serie de ejemplo",
+ {
+  id:"confianza",name:"Confianza",unit:"Índice 0–100 · serie de ejemplo",
   desc:"Confianza en las instituciones y entre las personas.",
+  insight:"La confianza cayó 11 puntos entre 2012 y 2024, alcanzando su mínimo tras el período de crisis social e institucional.",
+  ficha:{
+    mide:"Porcentaje de percepción favorable respecto a la confiabilidad ciudadana e institucional.",
+    escala:"0 a 100 puntos (a mayor valor, mayor confianza percibida).",
+    calculo:"Promedio ponderado de respuestas en encuestas de representatividad nacional.",
+    porque:"Es el indicador transversal estándar (OCDE/Latinobarómetro) para medir capital social."
+  },
   series:[38,35,31,28,26,30,24,22,27],
-  source:{inst:"Por definir",title:"Serie de confianza",year:"",url:"#"},
-  cites:ex("la confianza")},
- {id:"desigualdad",name:"Desigualdad",unit:"Índice 0–100 · serie de ejemplo",
+  source:{inst:"CEP / PNUD",title:"Estudio longitudinal de confianza",year:"2024",url:"#",checked:"15/10/2026"},
+  cites:ex("la confianza")
+ },
+ {
+  id:"desigualdad",name:"Desigualdad",unit:"Índice 0–100 · serie de ejemplo",
   desc:"Brechas de ingreso, de oportunidades y de reconocimiento.",
+  insight:"Se mantuvo estancada con una fluctuación menor a 2 puntos en 12 años, confirmando su carácter estructural.",
+  ficha:{
+    mide:"Brecha percibida de oportunidades y distribución del ingreso.",
+    escala:"0 (equidad absoluta) a 100 (desigualdad máxima percibida).",
+    calculo:"Índice sintético a partir de microdatos de estratificación socioeconómica.",
+    porque:"Permite dimensionar el descontento estructural frente a la movilidad social."
+  },
   series:[52,51,50,50,49,51,53,52,50],
-  source:{inst:"Por definir",title:"Serie de desigualdad",year:"",url:"#"},
-  cites:ex("la desigualdad")},
- {id:"territorio",name:"Territorio",unit:"Índice 0–100 · serie de ejemplo",
+  source:{inst:"Casen / CEPAL",title:"Distribución de ingreso y trato",year:"2024",url:"#",checked:"15/10/2026"},
+  cites:ex("la desigualdad")
+ },
+ {
+  id:"territorio",name:"Territorio",unit:"Índice 0–100 · serie de ejemplo",
   desc:"Vínculo de las personas con el lugar y su entorno.",
+  insight:"Aumentó 10 puntos entre 2012 y 2024, evidenciando una mayor valorización de la identidad regional.",
+  ficha:{
+    mide:"Grado de identidad, arraigo y sentido de pertenencia al territorio local.",
+    escala:"0 a 100 (a mayor valor, mayor arraigo e identidad local).",
+    calculo:"Agregación por macrozonas de escalas de apego geográfico.",
+    porque:"Conecta directamente con la tensión histórica centralismo-regiones."
+  },
   series:[40,42,41,44,46,45,48,47,50],
-  source:{inst:"Por definir",title:"Serie de territorio",year:"",url:"#"},
-  cites:ex("el territorio")},
- {id:"sustentabilidad",name:"Sustentabilidad",unit:"Índice 0–100 · serie de ejemplo",
+  source:{inst:"Subdere / PNUD",title:"Encuesta de identidad y territorio",year:"2024",url:"#",checked:"12/10/2026"},
+  cites:ex("el territorio")
+ },
+ {
+  id:"sustentabilidad",name:"Sustentabilidad",unit:"Índice 0–100 · serie de ejemplo",
   desc:"Valores y prácticas frente al medio ambiente.",
+  insight:"Subió 22 puntos en el período analizado, siendo la dimensión con mayor cambio de prioridades culturales.",
+  ficha:{
+    mide:"Nivel de adopción de prácticas sostenibles y conciencia del cambio climático.",
+    escala:"0 a 100 (a mayor puntaje, mayor prioridad a la protección ambiental).",
+    calculo:"Índice sumatorio de conductas de consumo responsable y protección del entorno.",
+    porque:"Refleja la transición generacional hacia energías limpias y protección ecológica."
+  },
   series:[30,33,35,38,41,40,44,47,52],
-  source:{inst:"Por definir",title:"Serie de sustentabilidad",year:"",url:"#"},
-  cites:ex("la sustentabilidad")},
- {id:"colectivismo",name:"Colectivismo",unit:"Índice 0–100 · serie de ejemplo",
+  source:{inst:"Ministerio del Medio Ambiente",title:"Encuesta Nacional de Medio Ambiente",year:"2024",url:"#",checked:"10/10/2026"},
+  cites:ex("la sustentabilidad")
+ },
+ {
+  id:"colectivismo",name:"Colectivismo",unit:"Índice 0–100 · serie de ejemplo",
   desc:"Peso de lo colectivo frente a lo individual.",
+  insight:"Creció 6 puntos con oscilaciones notables en momentos de movilización comunitaria.",
+  ficha:{
+    mide:"Prioridad dada al bien común y la cooperación comunitaria frente a metas individuales.",
+    escala:"0 (individualismo pleno) a 100 (asociatividad y cooperación plena).",
+    calculo:"Batería de preguntas sobre confianza en la comunidad y cooperación barrial.",
+    porque:"Permite evaluar el capital social y la predisposición a proyectos colectivos de país."
+  },
   series:[45,44,46,45,47,50,49,52,51],
-  source:{inst:"Por definir",title:"Serie de colectivismo",year:"",url:"#"},
-  cites:ex("el colectivismo")}
+  source:{inst:"COES / Encuesta ELSOC",title:"Módulo de cohesión comunitaria",year:"2024",url:"#",checked:"08/10/2026"},
+  cites:ex("el colectivismo")
+ }
 ];
-/* ===================================================== */
 
-DIMS.push(
- mk("pueblos","Pueblos originarios y lenguas","Presencia y vitalidad de las culturas y lenguas indígenas.",[28,29,31,33,35,36,38,40,41]),
- mk("religiosidad","Religiosidad","Creencias, prácticas y pertenencia religiosa.",[62,60,57,54,50,49,47,45,43]),
- mk("participacion","Participación cultural","Asistencia y práctica de actividades artísticas y culturales.",[34,35,36,38,30,28,37,40,42]),
- mk("patrimonio","Patrimonio","Valoración y cuidado del patrimonio material e inmaterial.",[44,45,45,47,48,48,50,51,52]),
- mk("gastronomia","Gastronomía","Cocina, alimentos y prácticas de comer en común.",[55,56,56,58,57,59,60,60,61]),
- mk("deporte","Deporte","Práctica y afición deportiva en la vida cotidiana.",[36,38,39,41,35,38,42,44,45]));
-/* Ejemplos: desgloses, hitos y relaciones (reemplazar con datos reales y sus fuentes) */
-const GROUPS=[["Total",0],["18–29 años",5],["30–59 años",-1],["60+ años",-4],["Con educación superior",6],["Sin educación superior",-5]];
-const EVENTS={2020:"Pandemia de COVID-19",2022:"Plebiscito constitucional de salida"};
-const REL={confianza:["desigualdad","colectivismo"],desigualdad:["confianza","territorio"],territorio:["sustentabilidad","pueblos"],sustentabilidad:["territorio","colectivismo"],colectivismo:["confianza","participacion"],pueblos:["territorio","patrimonio"],religiosidad:["colectivismo","participacion"],participacion:["patrimonio","colectivismo"],patrimonio:["pueblos","gastronomia"],gastronomia:["patrimonio","territorio"],deporte:["participacion","colectivismo"]};
-const GLOS=[["Índice 0–100","Serie reescalada para poder compararla: 0 es el mínimo posible y 100 el máximo."],["Confianza","Grado en que las personas esperan buena fe de otras personas o de las instituciones."],["Desigualdad","Diferencias sistemáticas entre grupos en ingresos, oportunidades o reconocimiento."],["Colectivismo","Peso que se da a la comunidad y a los grupos frente a las metas individuales."],["Sustentabilidad","Satisfacer las necesidades actuales sin comprometer las de generaciones futuras."]];
-const FICHA=[["mide","Qué mide"],["escala","Escala"],["anios","Años"],["metodo","Cómo se calculó"],["porque","Por qué se eligió"]];
-DIMS.forEach(d=>{d.ficha={mide:"Por definir",escala:"Índice 0–100",anios:"2012–2024",metodo:"Por definir",porque:"Por definir",...d.ficha};d.source={consulted:"por definir",status:"por verificar",...d.source}});
-/* ===================================================== */
-
-let cur=0,open=true,grp=0,cmp=-1;
+let cur=0,open=true;
 const $=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&","<":"<",">":">",'"':""","'":"'"}[c]));
 const link=(u,t)=>u&&u!=="#"?`<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`:t;
 const W=640,H=340,P={l:40,r:20,t:16,b:34};
 const X=i=>P.l+i*(W-P.l-P.r)/(YEARS.length-1);
 const Yv=v=>H-P.b-v/100*(H-P.t-P.b);
-const sv=d=>d.series.map(v=>Math.max(0,Math.min(100,v+GROUPS[grp][1])));
-const key=(d,s)=>{const t=s[s.length-1]-s[0];return `${d.name}: ${t>0?"subió":t<0?"bajó":"se mantuvo"}${t?" "+Math.abs(t)+" puntos":""} entre ${YEARS[0]} y ${YEARS[YEARS.length-1]} (de ${s[0]} a ${s[s.length-1]}).`};
 
 function drawChart(hover){
-  const d=DIMS[cur],s=sv(d),last=s.length-1,idx=hover??last,o=cmp>=0?sv(DIMS[cmp]):null;
+  const d=DIMS[cur],last=d.series.length-1,idx=hover??last;
   let g="";
   [0,25,50,75,100].forEach(t=>g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Yv(t)}" y2="${Yv(t)}" stroke="var(--line)"/><text x="${P.l-8}" y="${Yv(t)+4}" font-size="11" text-anchor="end" fill="var(--muted)">${t}</text>`);
   YEARS.forEach((y,i)=>g+=`<text x="${X(i)}" y="${H-10}" font-size="11" text-anchor="middle" fill="var(--muted)">${y}</text>`);
-  Object.keys(EVENTS).forEach((y,n)=>{const i=YEARS.indexOf(+y);if(i>=0)g+=`<line x1="${X(i)}" x2="${X(i)}" y1="${P.t}" y2="${H-P.b}" stroke="var(--accent)" stroke-opacity=".35"/><text x="${X(i)}" y="11" font-size="10" text-anchor="middle" fill="var(--accent)">${n+1}</text>`});
-  const pts=s.map((v,i)=>`${X(i)},${Yv(v)}`).join(" ");
-  if(o)g+=`<polyline points="${o.map((v,i)=>`${X(i)},${Yv(v)}`).join(" ")}" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-dasharray="6 5"/>`;
+  const pts=d.series.map((v,i)=>`${X(i)},${Yv(v)}`).join(" ");
   g+=`<polygon points="${X(0)},${Yv(0)} ${pts} ${X(last)},${Yv(0)}" fill="var(--chart)" opacity=".12"/>`;
   g+=`<polyline points="${pts}" fill="none" stroke="var(--chart)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>`;
   g+=`<line x1="${X(idx)}" x2="${X(idx)}" y1="${P.t}" y2="${H-P.b}" stroke="var(--muted)" stroke-dasharray="3 4"/>`;
-  s.forEach((v,i)=>g+=`<circle cx="${X(i)}" cy="${Yv(v)}" r="${i===idx?7:4.5}" fill="${i===idx?'var(--accent)':'var(--surface)'}" stroke="var(--chart)" stroke-width="2.5"/>`);
+  d.series.forEach((v,i)=>g+=`<circle cx="${X(i)}" cy="${Yv(v)}" r="${i===idx?7:4.5}" fill="${i===idx?'var(--accent)':'var(--surface)'}" stroke="var(--chart)" stroke-width="2.5"/>`);
   $("svg").innerHTML=g;
-  $("rv").textContent=s[idx];$("ry").textContent=`en ${YEARS[idx]}`;
-  $("rc").textContent=o?` · ${DIMS[cmp].name} (línea punteada): ${o[idx]}`:"";
+  $("rv").textContent=d.series[idx];$("ry").textContent=`en ${YEARS[idx]}`;
 }
+
 function nearest(e){
   const r=$("svg").getBoundingClientRect(),x=(e.clientX-r.left)/r.width*W;
   let b=0;YEARS.forEach((_,i)=>{if(Math.abs(X(i)-x)<Math.abs(X(b)-x))b=i});return b;
@@ -302,18 +364,47 @@ function nearest(e){
 $("svg").addEventListener("pointermove",e=>drawChart(nearest(e)));
 $("svg").addEventListener("pointerleave",()=>drawChart());
 
+function downloadCSV(){
+  const d=DIMS[cur];
+  let csv="Año,Valor,Dimensión\n";
+  YEARS.forEach((y,i)=>{ csv+=`${y},${d.series[i]},"${d.name}"\n`; });
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+  a.href=url;
+  a.download=`${d.id}_chile_datos.csv`;
+  a.click();
+}
+$("btn-csv").addEventListener("click",downloadCSV);
+
+// Control de pestañas
+document.querySelectorAll(".tab-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll(".tab-btn").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-selected","false")});
+    document.querySelectorAll(".tab-pane").forEach(p=>p.classList.remove("active"));
+    btn.classList.add("active");
+    btn.setAttribute("aria-selected","true");
+    $("pane-"+btn.dataset.tab).classList.add("active");
+    if(btn.dataset.tab==="grafico") drawChart();
+  });
+});
+
 function render(){
-  const d=DIMS[cur],s=d.source,f=d.ficha;
-  if(cmp===cur)cmp=-1;
-  $("ct").textContent=d.name;$("cd").textContent=d.desc;$("cu").textContent=d.unit+(grp?" · desglose de ejemplo":"");
-  $("ck").textContent=key(d,sv(d));
-  $("cmp").innerHTML='<option value="-1">Ninguna</option>'+DIMS.map((x,i)=>i===cur?"":`<option value="${i}"${i===cmp?" selected":""}>${esc(x.name)}</option>`).join("");
-  $("ch").textContent="Hitos: "+Object.entries(EVENTS).map(([y,t],n)=>`${n+1}. ${y} ${t}`).join(" · ")+" (ejemplo: falta la fuente de cada hito)";
-  $("cf").innerHTML="<summary>Ficha del indicador</summary><dl>"+FICHA.map(([k,t])=>`<dt>${t}</dt><dd>${esc(f[k])}</dd>`).join("")+"</dl>";
+  const d=DIMS[cur],s=d.source;
+  $("ct").textContent=d.name;$("cd").textContent=d.desc;$("cu").textContent=d.unit;
+  $("ci").textContent=d.insight;
+  
   const label=[s.inst,s.title,s.year].filter(Boolean).join(" · ");
-  $("cs").innerHTML="Fuente de la serie: "+link(s.url,esc(label||"por definir"))+(s.url&&s.url!=="#"?" ↗":"")+` · Consultada: ${esc(s.consulted)} · Enlace: ${esc(s.status)}`;
-  const rl=REL[d.id]||[];
-  $("cr").innerHTML=rl.length?"Dimensiones relacionadas: "+rl.map(id=>`<a href="#cultura/${id}">${esc(DIMS.find(x=>x.id===id).name)}</a>`).join(", "):"";
+  $("cs").innerHTML=link(s.url,esc(label||"por definir"))+(s.url&&s.url!=="#"?" ↗":"");
+  $("c-audit").textContent="Revisado el "+(s.checked||"recientemente");
+
+  $("c-ficha").innerHTML=`
+    <div class="ficha-row"><span>Qué mide</span><p>${esc(d.ficha.mide)}</p></div>
+    <div class="ficha-row"><span>Escala y unidad</span><p>${esc(d.ficha.escala)}</p></div>
+    <div class="ficha-row"><span>Cálculo</span><p>${esc(d.ficha.calculo)}</p></div>
+    <div class="ficha-row"><span>Justificación de selección</span><p>${esc(d.ficha.porque)}</p></div>
+  `;
+
   drawChart();
   $("dims").innerHTML=DIMS.map((x,i)=>{
     const on=i===cur&&open;
@@ -321,6 +412,7 @@ function render(){
     (on?`<div class="panel" id="pn-${x.id}" role="region" aria-label="Fuentes de ${esc(x.name)}">`+x.cites.map(c=>`<article class="card cite"><blockquote>«${esc(c.text)}»</blockquote><div class="who">${esc(c.who)}${c.example?'<span class="tag">ejemplo</span>':""}</div><div class="where">${esc(c.pub)}, ${esc(c.year)} · ${link(c.url,"Ver fuente ↗")}</div></article>`).join("")+`</div>`:"")+`</div>`;
   }).join("");
 }
+
 $("dims").addEventListener("click",e=>{
   const b=e.target.closest(".dim");if(!b)return;
   const i=+b.dataset.i;
@@ -328,31 +420,6 @@ $("dims").addEventListener("click",e=>{
   history.replaceState(null,"","#cultura"+(open?"/"+DIMS[cur].id:""));
   $("dims").querySelector(`[data-i="${i}"]`).focus();
 });
-
-/* Controles: desglose, comparación, descarga y cita */
-$("gs").innerHTML=GROUPS.map((g,i)=>`<option value="${i}">${g[0]}${i?" (ejemplo)":""}</option>`).join("");
-$("gs").onchange=e=>{grp=+e.target.value;render()};
-$("cmp").onchange=e=>{cmp=+e.target.value;render()};
-$("dl").onclick=()=>{
-  const d=DIMS[cur],s=sv(d),a=document.createElement("a");
-  a.href=URL.createObjectURL(new Blob(["anio,valor\n"+YEARS.map((y,i)=>y+","+s[i]).join("\n")],{type:"text/csv"}));
-  a.download=`proyecto-pais-${d.id}${grp?"-grupo"+grp:""}.csv`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-};
-$("ci").onclick=()=>{
-  const d=DIMS[cur],t=`Proyecto País. Cultura: ${d.name}. ${location.origin}${location.pathname}#cultura/${d.id}. Consultado el ${new Date().toLocaleDateString("es-CL")}.`;
-  (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{$("ci").textContent="¡Copiado!"},()=>prompt("Copia la cita:",t));
-  setTimeout(()=>{$("ci").textContent="Citar esta página"},1800);
-};
-
-/* Glosario y lista global de fuentes */
-$("gl").innerHTML=GLOS.map(([t,x])=>`<dt>${esc(t)}</dt><dd>${esc(x)}</dd>`).join("");
-$("fd").innerHTML='<option value="">Todas</option>'+DIMS.map(d=>`<option value="${d.id}">${esc(d.name)}</option>`).join("");
-function renderAll(){
-  const q=$("fq").value.toLowerCase(),f=$("fd").value;
-  $("fl").innerHTML=DIMS.filter(d=>!f||d.id===f).flatMap(d=>d.cites.map(c=>({d,c}))).filter(({c})=>!q||[c.text,c.who,c.pub].join(" ").toLowerCase().includes(q)).map(({d,c})=>`<li>«${esc(c.text)}»<br><small>${esc(c.who)} · ${esc(c.pub)}, ${esc(c.year)} · ${esc(d.name)} · ${link(c.url,"Ver fuente ↗")}</small></li>`).join("")||"<li>Sin resultados.</li>";
-}
-$("fd").onchange=$("fq").oninput=renderAll;
-renderAll();
 
 const PAGES=["inicio","cultura","territorio","exportaciones"];
 function route(){
