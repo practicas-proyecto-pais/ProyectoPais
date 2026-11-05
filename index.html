@@ -48,9 +48,8 @@ h1{font-size:clamp(38px,6.5vw,68px);line-height:1.02;letter-spacing:-.02em;margi
 .ovw h2{margin:0 0 4px;font-size:22px;letter-spacing:-.01em}
 .ovw p{margin:0 0 16px;color:var(--muted);font-size:15px;max-width:640px}
 .ovg{display:grid;grid-template-columns:repeat(auto-fill,minmax(176px,1fr));gap:12px}
-.ov{display:grid;gap:6px;align-content:start;text-align:left;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .15s}
+.ov{display:grid;gap:6px;align-content:start;text-decoration:none;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .15s}
 .ov:hover{border-color:var(--accent)}
-.ov[aria-current="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
 .ov .on{font-size:13px;font-weight:700;line-height:1.25;min-height:2.5em}
 .ov .vv{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .ov b{font-size:30px;letter-spacing:-.02em;line-height:1}
@@ -70,17 +69,6 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .src{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
 .src a{color:var(--accent);text-underline-offset:3px}
 
-.dims{display:grid;gap:10px}
-.item{display:grid;gap:8px}
-.panel{display:grid;gap:10px;padding:2px 0 6px 10px;border-left:2px solid var(--line);margin-left:6px;animation:in .25s ease both}
-.panel .cite{margin:0;padding:16px 18px;box-shadow:none}
-@media(prefers-reduced-motion:reduce){.panel{animation:none}}
-.dim{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px 18px;font:inherit;cursor:pointer;transition:border-color .15s,transform .15s}
-.dim:hover{border-color:var(--accent);transform:translateY(-1px)}
-.dim b{font-size:15px;letter-spacing:.06em;text-transform:uppercase}
-.dim span{display:block;font-size:13px;color:var(--muted);font-weight:400;letter-spacing:0;text-transform:none;margin-top:2px}
-.dim[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
-.dim em{font-style:normal;font-size:12px;color:var(--muted);white-space:nowrap}
 
 .cites h3{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:700}
 .cites h3 span{color:var(--accent)}
@@ -124,6 +112,11 @@ footer p{margin:0}
 .how p{margin:0;color:var(--muted);font-size:15px}
 .soon{padding:32px;margin:12px 0 56px}
 .soon h2{margin:0 0 8px;font-size:22px}.soon p{margin:0;color:var(--muted)}
+.hero.s{padding:40px 0 24px}.hero.s h1{font-size:clamp(32px,5vw,48px)}.hero.s .lead{font-size:clamp(16px,1.8vw,18px)}
+.back{display:inline-block;margin:28px 0 0;font-size:14px;color:var(--muted);text-underline-offset:3px}.back:hover{color:var(--ink)}
+.explorer{padding-top:16px}
+.chart details.ficha{border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
+.chart .hit{margin:8px 0 0}
 </style>
 </head>
 <body>
@@ -162,45 +155,50 @@ footer p{margin:0}
   </div>
 
   <div class="page" id="p-cultura">
-    <section class="hero">
-      <p class="eyebrow">Cultura</p>
-      <h1>La cultura chilena en once dimensiones</h1>
-      <p class="lead">Once dimensiones culturales, sus series de datos y las voces que las describen, siempre con la fuente a la vista.</p>
-      <div class="banner">Versión de maqueta: los datos y las citas son de ejemplo</div>
-    </section>
 
-    <section class="ovw" aria-labelledby="oh">
-      <h2 id="oh">Las once dimensiones de un vistazo</h2>
-      <p id="ovd"></p>
-      <div class="ovg" id="ovg" role="group" aria-label="Resumen de las once dimensiones"></div>
-    </section>
+    <div id="v-list">
+      <section class="hero s">
+        <p class="eyebrow">Cultura</p>
+        <h1>La cultura chilena en once dimensiones</h1>
+        <p class="lead">Elige una dimensión para ver su serie de datos y las citas que la describen.</p>
+        <div class="banner">Versión de maqueta: los datos y las citas son de ejemplo</div>
+      </section>
+      <section class="ovw" aria-labelledby="oh">
+        <h2 id="oh">Las once dimensiones de un vistazo</h2>
+        <p id="ovd"></p>
+        <div class="ovg" id="ovg" role="group" aria-label="Las once dimensiones"></div>
+      </section>
+      <section class="more" aria-label="Glosario y fuentes">
+        <div class="card box"><h3>Glosario (borrador)</h3><dl id="gl"></dl></div>
+        <div class="card box"><h3>Todas las fuentes</h3>
+          <div class="ctl"><label>Dimensión <select id="fd"></select></label><input id="fq" type="search" placeholder="Buscar…" aria-label="Buscar fuentes"></div>
+          <ul id="fl"></ul></div>
+      </section>
+    </div>
 
-    <section class="explorer" id="ex" aria-label="Explorador de dimensiones culturales">
-      <div class="card chart">
-        <div class="chart-head">
-          <h2 id="ct" tabindex="-1"></h2>
-          <span class="unit" id="cu"></span>
+    <div id="v-dim" hidden>
+      <a class="back" href="#cultura">← Todas las dimensiones</a>
+      <section class="explorer" id="ex" aria-label="Explorador de la dimensión">
+        <div class="card chart">
+          <div class="chart-head"><h2 id="ct" tabindex="-1"></h2><span class="unit" id="cu"></span></div>
+          <p class="desc" id="cd"></p>
+          <p class="key" id="ck"></p>
+          <svg id="svg" viewBox="0 0 640 340" role="img" aria-labelledby="ct"></svg>
+          <div class="readout" aria-live="polite"><b id="rv"></b><span id="ry"></span><span id="rc"></span></div>
+          <p class="hit" id="ch"></p>
+          <div class="src" id="cs"></div>
+          <details class="ficha"><summary>Opciones del gráfico</summary>
+            <div class="ctl"><label>Ver por <select id="gs"></select></label><label>Comparar con <select id="cmp"></select></label></div>
+          </details>
+          <details class="ficha"><summary>Ficha, relacionadas y descargas</summary>
+            <div id="cf"></div><div class="rel" id="cr"></div>
+            <div class="acts"><button class="btn" id="dl">Descargar CSV</button><button class="btn" id="ci">Citar esta página</button></div>
+          </details>
         </div>
-        <p class="desc" id="cd"></p>
-        <p class="key" id="ck"></p>
-        <div class="ctl"><label>Ver por <select id="gs"></select></label><label>Comparar con <select id="cmp"></select></label></div>
-        <svg id="svg" viewBox="0 0 640 340" role="img" aria-labelledby="ct"></svg>
-        <div class="readout" aria-live="polite"><b id="rv"></b><span id="ry"></span><span id="rc"></span></div>
-        <p class="hit" id="ch"></p>
-        <details class="ficha" id="cf"></details>
-        <div class="src"><div id="cs"></div><div class="rel" id="cr"></div>
-          <div class="acts"><button class="btn" id="dl">Descargar CSV</button><button class="btn" id="ci">Citar esta página</button></div></div>
-      </div>
+        <div class="cites" id="cc" aria-label="Citas de la dimensión"></div>
+      </section>
+    </div>
 
-      <div class="dims" id="dims" role="group" aria-label="Dimensiones y sus fuentes"></div>
-    </section>
-
-    <section class="more" aria-label="Glosario y fuentes">
-      <div class="card box"><h3>Glosario (borrador)</h3><dl id="gl"></dl></div>
-      <div class="card box"><h3>Todas las fuentes</h3>
-        <div class="ctl"><label>Dimensión <select id="fd"></select></label><input id="fq" type="search" placeholder="Buscar…" aria-label="Buscar fuentes"></div>
-        <ul id="fl"></ul></div>
-    </section>
   </div>
 
   <div class="page" id="p-territorio">
@@ -279,7 +277,7 @@ const FICHA=[["mide","Qué mide"],["escala","Escala"],["anios","Años"],["metodo
 DIMS.forEach(d=>{d.ficha={mide:"Por definir",escala:"Índice 0–100",anios:"2012–2024",metodo:"Por definir",porque:"Por definir",...d.ficha};d.source={consulted:"por definir",status:"por verificar",...d.source}});
 /* ===================================================== */
 
-let cur=0,open=true,grp=0,cmp=-1;
+let cur=0,grp=0,cmp=-1;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const link=(u,t)=>u&&u!=="#"?`<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`:t;
@@ -316,18 +314,12 @@ $("svg").addEventListener("pointerleave",()=>drawChart());
 /* Panorama: una miniatura por dimensión (escala fija 0–100, igual que el gráfico) */
 const SX=i=>2+fr(i)*116,SY=v=>38-v/100*36;
 function renderOv(){
-  $("ovd").textContent=`Valor en ${YEARS[L]} y cambio desde ${YEARS[0]}.${grp?" Desglose de ejemplo.":""} Elige una dimensión para ver su serie, su ficha y sus fuentes.`;
+  $("ovd").textContent=`Valor en ${YEARS[L]} y cambio desde ${YEARS[0]}.${grp?" Desglose: "+GROUPS[grp][0]+" (ejemplo).":""}`;
   $("ovg").innerHTML=DIMS.map((d,i)=>{
     const s=sv(d),t=s[L]-s[0],sg=t>0?"+"+t:t<0?"−"+Math.abs(t):"0",w=t>0?"subió":t<0?"bajó":"se mantuvo";
-    return `<button class="ov" data-o="${i}" aria-current="${i===cur}" aria-label="${esc(d.name)}: ${s[L]} en ${YEARS[L]}; ${w}${t?" "+Math.abs(t)+" puntos":""} desde ${YEARS[0]}"><span class="on">${esc(d.name)}</span><span class="vv"><b>${s[L]}</b><small>${sg} pts desde ${YEARS[0]}</small></span><svg viewBox="0 0 120 40" aria-hidden="true"><polyline points="${s.map((v,k)=>SX(k)+","+SY(v)).join(" ")}" fill="none" stroke="var(--chart)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${SX(L)}" cy="${SY(s[L])}" r="3" fill="var(--accent)"/></svg></button>`;
+    return `<a class="ov" href="#cultura/${d.id}" aria-label="${esc(d.name)}: ${s[L]} en ${YEARS[L]}; ${w}${t?" "+Math.abs(t)+" puntos":""} desde ${YEARS[0]}"><span class="on">${esc(d.name)}</span><span class="vv"><b>${s[L]}</b><small>${sg} pts desde ${YEARS[0]}</small></span><svg viewBox="0 0 120 40" aria-hidden="true"><polyline points="${s.map((v,k)=>SX(k)+","+SY(v)).join(" ")}" fill="none" stroke="var(--chart)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="${SX(L)}" cy="${SY(s[L])}" r="3" fill="var(--accent)"/></svg></a>`;
   }).join("");
 }
-$("ovg").addEventListener("click",e=>{
-  const b=e.target.closest(".ov");if(!b)return;
-  cur=+b.dataset.o;open=true;render();
-  history.replaceState(null,"","#cultura/"+DIMS[cur].id);
-  $("ex").scrollIntoView();$("ct").focus({preventScroll:true});
-});
 
 function render(){
   const d=DIMS[cur],s=d.source,f=d.ficha;
@@ -336,25 +328,14 @@ function render(){
   $("ck").textContent=key(d,sv(d));
   $("cmp").innerHTML='<option value="-1">Ninguna</option>'+DIMS.map((x,i)=>i===cur?"":`<option value="${i}"${i===cmp?" selected":""}>${esc(x.name)}</option>`).join("");
   $("ch").textContent="Hitos: "+Object.entries(EVENTS).map(([y,t],n)=>`${n+1}. ${y} ${t}`).join(" · ")+" (ejemplo: falta la fuente de cada hito)";
-  $("cf").innerHTML="<summary>Ficha del indicador</summary><dl>"+FICHA.map(([k,t])=>`<dt>${t}</dt><dd>${esc(f[k])}</dd>`).join("")+"</dl>";
+  $("cf").innerHTML="<dl>"+FICHA.map(([k,t])=>`<dt>${t}</dt><dd>${esc(f[k])}</dd>`).join("")+"</dl>";
   const label=[s.inst,s.title,s.year].filter(Boolean).join(" · ");
   $("cs").innerHTML="Fuente de la serie: "+link(s.url,esc(label||"por definir"))+(s.url&&s.url!=="#"?" ↗":"")+` · Consultada: ${esc(s.consulted)} · Enlace: ${esc(s.status)}`;
   const rl=REL[d.id]||[];
   $("cr").innerHTML=rl.length?"Dimensiones relacionadas: "+rl.map(id=>`<a href="#cultura/${id}">${esc(DIMS.find(x=>x.id===id).name)}</a>`).join(", "):"";
   drawChart();renderOv();
-  $("dims").innerHTML=DIMS.map((x,i)=>{
-    const on=i===cur&&open;
-    return `<div class="item"><button class="dim" data-i="${i}" aria-pressed="${i===cur}" aria-expanded="${on}" aria-controls="pn-${x.id}"><div><b>${esc(x.name)}</b><span>${esc(x.desc)}</span></div><em>${x.cites.length} fuentes ${on?"▴":"▾"}</em></button>`+
-    (on?`<div class="panel" id="pn-${x.id}" role="region" aria-label="Fuentes de ${esc(x.name)}">`+x.cites.map(c=>`<article class="card cite"><blockquote>«${esc(c.text)}»</blockquote><div class="who">${esc(c.who)}${c.example?'<span class="tag">ejemplo</span>':""}</div><div class="where">${esc(c.pub)}, ${esc(c.year)} · ${link(c.url,"Ver fuente ↗")}</div></article>`).join("")+`</div>`:"")+`</div>`;
-  }).join("");
+  $("cc").innerHTML=`<h3>Citas sobre ${esc(d.name.toLowerCase())}</h3>`+d.cites.map(c=>`<article class="card cite"><blockquote>«${esc(c.text)}»</blockquote><div class="who">${esc(c.who)}${c.example?'<span class="tag">ejemplo</span>':""}</div><div class="where">${esc(c.pub)}, ${esc(c.year)} · ${link(c.url,"Ver fuente ↗")}</div></article>`).join("");
 }
-$("dims").addEventListener("click",e=>{
-  const b=e.target.closest(".dim");if(!b)return;
-  const i=+b.dataset.i;
-  open=i===cur?!open:true;cur=i;render();
-  history.replaceState(null,"","#cultura"+(open?"/"+DIMS[cur].id:""));
-  $("dims").querySelector(`[data-i="${i}"]`).focus();
-});
 
 $("gs").innerHTML=GROUPS.map((g,i)=>`<option value="${i}">${g[0]}${i?" (ejemplo)":""}</option>`).join("");
 $("gs").onchange=e=>{grp=+e.target.value;render()};
@@ -382,13 +363,16 @@ renderAll();
 const PAGES=["inicio","cultura","territorio","exportaciones"];
 function route(){
   const [h,sub]=location.hash.slice(1).split("/"),p=PAGES.includes(h)?h:"inicio";
-  if(p==="cultura"){const i=DIMS.findIndex(x=>x.id===sub);if(i>=0&&(i!==cur||!open)){cur=i;open=true;render()}}
+  const i=p==="cultura"?DIMS.findIndex(x=>x.id===sub):-1;
+  if(i>=0){cur=i;render()}
+  $("v-list").hidden=i>=0;$("v-dim").hidden=i<0;
   PAGES.forEach(n=>$("p-"+n).classList.toggle("on",n===p));
   document.querySelectorAll("nav a").forEach(a=>{
     if(a.getAttribute("href")==="#"+p)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
   });
-  document.title=(p==="inicio"?"":p[0].toUpperCase()+p.slice(1)+" · ")+"Proyecto País";
-  if(!sub)window.scrollTo(0,0);
+  document.title=(i>=0?DIMS[i].name+" · ":"")+(p==="inicio"?"":p[0].toUpperCase()+p.slice(1)+" · ")+"Proyecto País";
+  window.scrollTo(0,0);
+  if(i>=0)$("ct").focus({preventScroll:true});
 }
 addEventListener("hashchange",route);
 render();route();
