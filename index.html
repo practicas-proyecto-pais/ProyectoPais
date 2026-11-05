@@ -28,26 +28,22 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:"Space Grotesk",
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-/* Barra superior */
 header.top{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .bar{display:flex;align-items:center;justify-content:space-between;height:64px}
 .brand{font-weight:700;letter-spacing:.02em;text-decoration:none;display:flex;align-items:center;gap:10px}
 .brand i{width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block}
 nav{display:flex;gap:6px}
-nav a,nav span{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:99px;text-decoration:none;color:var(--muted)}
-nav a.on{background:var(--ink);color:var(--bg)}
-nav span{opacity:.6;cursor:default}
-nav span small{font-size:10px;margin-left:6px;border:1px solid var(--line);border-radius:99px;padding:1px 6px;letter-spacing:.04em}
-@media(max-width:640px){nav span small{display:none}nav a,nav span{padding:8px 10px;font-size:12px}}
+nav a{font-size:13px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border-radius:99px;text-decoration:none;color:var(--muted)}
+nav a:hover{color:var(--ink)}
+nav a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+@media(max-width:640px){.bar{height:auto;flex-wrap:wrap;padding:10px 0}nav{width:100%;overflow-x:auto}nav a{padding:8px 10px;font-size:12px}}
 
-/* Portada */
 .hero{padding:64px 0 36px}
 .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 14px}
 h1{font-size:clamp(38px,6.5vw,68px);line-height:1.02;letter-spacing:-.02em;margin:0 0 16px;font-weight:700}
 .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:620px;margin:0}
 .banner{display:inline-flex;gap:8px;align-items:center;margin-top:24px;padding:6px 14px;border-radius:99px;background:var(--accent-soft);font-size:13px}
 
-/* Explorador */
 .explorer{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;padding:24px 0 56px;align-items:start}
 @media(max-width:860px){.explorer{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
@@ -60,8 +56,8 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .readout{display:flex;gap:18px;align-items:baseline;margin-top:6px;font-size:14px;color:var(--muted)}
 .readout b{font-size:28px;color:var(--ink);letter-spacing:-.02em}
 .src{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.src a{color:var(--accent);text-underline-offset:3px}
 
-/* Selector de dimensiones */
 .dims{display:grid;gap:8px;margin-bottom:20px}
 .dim{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;text-align:left;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:14px;padding:14px 18px;font:inherit;cursor:pointer;transition:border-color .15s,transform .15s}
 .dim:hover{border-color:var(--accent);transform:translateY(-1px)}
@@ -70,10 +66,12 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .dim[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
 .dim em{font-style:normal;font-size:12px;color:var(--muted);white-space:nowrap}
 
-/* Citas */
 .cites h3{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px;font-weight:700}
-.cite{padding:20px 22px;margin-bottom:12px}
-.cite blockquote{margin:0 0 14px;font-size:16px;line-height:1.55;position:relative;padding-left:16px;border-left:3px solid var(--accent)}
+.cites h3 span{color:var(--accent)}
+.cite{padding:20px 22px;margin-bottom:12px;animation:in .25s ease both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.cite{animation:none}}
+.cite blockquote{margin:0 0 14px;font-size:16px;line-height:1.55;padding-left:16px;border-left:3px solid var(--accent)}
 .who{font-size:14px;font-weight:700}
 .where{font-size:13px;color:var(--muted)}
 .where a{color:var(--accent);text-underline-offset:3px}
@@ -84,10 +82,7 @@ footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr
 footer h4{margin:0 0 6px;color:var(--ink);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
 footer p{margin:0}
 
-/* Páginas y navegación */
 .page{display:none}.page.on{display:block}
-nav a[aria-current="page"]{background:var(--ink);color:var(--bg)}
-nav a:hover{color:var(--ink)}nav a[aria-current="page"]:hover{color:var(--bg)}
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;padding:12px 0 24px}
 .tile{display:block;padding:26px;text-decoration:none;transition:transform .15s,border-color .15s}
 .tile:hover{transform:translateY(-3px);border-color:var(--accent)}
@@ -100,7 +95,6 @@ nav a:hover{color:var(--ink)}nav a[aria-current="page"]:hover{color:var(--bg)}
 .how p{margin:0;color:var(--muted);font-size:15px}
 .soon{padding:32px;margin:12px 0 56px}
 .soon h2{margin:0 0 8px;font-size:22px}.soon p{margin:0;color:var(--muted)}
-@media(max-width:640px){.bar{height:auto;flex-wrap:wrap;padding:10px 0}nav{width:100%;overflow-x:auto}}
 </style>
 </head>
 <body>
@@ -119,7 +113,6 @@ nav a:hover{color:var(--ink)}nav a[aria-current="page"]:hover{color:var(--bg)}
 
 <main class="wrap">
 
-  <!-- INICIO -->
   <div class="page" id="p-inicio">
     <section class="hero">
       <p class="eyebrow">Proyecto País</p>
@@ -127,13 +120,11 @@ nav a:hover{color:var(--ink)}nav a[aria-current="page"]:hover{color:var(--bg)}
       <p class="lead">Una plataforma para explorar cómo es el país: su cultura, su territorio y lo que exporta, siempre con la fuente a la vista.</p>
       <div class="banner">Versión de maqueta: los datos y las citas son de ejemplo</div>
     </section>
-
     <section class="tiles" aria-label="Secciones de la plataforma">
       <a class="card tile" href="#cultura"><small>Disponible</small><h3>Cultura</h3><p>Cinco dimensiones culturales con sus series de datos y citas de fuentes verificadas.</p><span>Explorar →</span></a>
       <a class="card tile" href="#territorio"><small>En construcción</small><h3>Territorio</h3><p>Geografía, regiones y el vínculo de las personas con el lugar.</p><span>Ver →</span></a>
       <a class="card tile" href="#exportaciones"><small>En construcción</small><h3>Exportaciones</h3><p>Qué vende Chile al mundo y cómo ha cambiado en el tiempo.</p><span>Ver →</span></a>
     </section>
-
     <section class="how" aria-label="Cómo funciona">
       <div><b>Datos</b><p>Series con su definición, año y fuente.</p></div>
       <div><b>Citas</b><p>Fragmentos textuales breves, con autor y enlace al original.</p></div>
@@ -141,38 +132,36 @@ nav a:hover{color:var(--ink)}nav a[aria-current="page"]:hover{color:var(--bg)}
     </section>
   </div>
 
-  <!-- CULTURA -->
   <div class="page" id="p-cultura">
-  <section class="hero">
-    <p class="eyebrow">Cultura</p>
-    <h1>La cultura chilena en cinco dimensiones</h1>
-    <p class="lead">Cinco dimensiones culturales, sus series de datos y las voces que las describen, siempre con la fuente a la vista.</p>
-    <div class="banner">Versión de maqueta: los datos y las citas son de ejemplo</div>
-  </section>
+    <section class="hero">
+      <p class="eyebrow">Cultura</p>
+      <h1>La cultura chilena en cinco dimensiones</h1>
+      <p class="lead">Cinco dimensiones culturales, sus series de datos y las voces que las describen, siempre con la fuente a la vista.</p>
+      <div class="banner">Versión de maqueta: los datos y las citas son de ejemplo</div>
+    </section>
 
-  <section class="explorer" aria-label="Explorador de dimensiones culturales">
-    <div class="card chart">
-      <div class="chart-head">
-        <h2 id="ct"></h2>
-        <span class="unit">Índice 0–100 · serie de ejemplo</span>
+    <section class="explorer" aria-label="Explorador de dimensiones culturales">
+      <div class="card chart">
+        <div class="chart-head">
+          <h2 id="ct"></h2>
+          <span class="unit" id="cu"></span>
+        </div>
+        <p class="desc" id="cd"></p>
+        <svg id="svg" viewBox="0 0 640 340" role="img" aria-labelledby="ct"></svg>
+        <div class="readout" aria-live="polite"><b id="rv"></b><span id="ry"></span></div>
+        <div class="src" id="cs"></div>
       </div>
-      <p class="desc" id="cd"></p>
-      <svg id="svg" viewBox="0 0 640 340" role="img" aria-labelledby="ct"></svg>
-      <div class="readout" aria-live="polite"><b id="rv"></b><span id="ry"></span></div>
-      <div class="src">Fuente de la serie: <span id="cs">por definir</span></div>
-    </div>
 
-    <div>
-      <div class="dims" id="dims" role="group" aria-label="Dimensiones"></div>
-      <div class="cites">
-        <h3>Lo que dicen las fuentes</h3>
-        <div id="cites"></div>
+      <div>
+        <div class="dims" id="dims" role="group" aria-label="Dimensiones"></div>
+        <div class="cites" aria-live="polite">
+          <h3>Lo que dicen las fuentes · <span id="cn"></span></h3>
+          <div id="cites"></div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
   </div>
 
-  <!-- TERRITORIO -->
   <div class="page" id="p-territorio">
     <section class="hero">
       <p class="eyebrow">Territorio</p>
@@ -182,7 +171,6 @@ nav a:hover{color:var(--ink)}nav a[aria-current="page"]:hover{color:var(--bg)}
     <div class="card soon"><h2>En construcción</h2><p>Esta sección se desarrollará después de Cultura.</p></div>
   </div>
 
-  <!-- EXPORTACIONES -->
   <div class="page" id="p-exportaciones">
     <section class="hero">
       <p class="eyebrow">Exportaciones</p>
@@ -203,24 +191,55 @@ nav a:hover{color:var(--ink)}nav a[aria-current="page"]:hover{color:var(--bg)}
 </footer>
 
 <script>
-/* ===== DATOS (reemplazar luego por datos reales) ===== */
+/* ===== DATOS (reemplazar luego por datos reales) =====
+   Cada dimensión trae su propia serie, fuente de la serie y citas.
+   source: {inst, title, year, url}  → url "#" = aún sin enlace
+   cites:  [{text, who, pub, year, url}] → texto textual y breve
+   example:true muestra la etiqueta "ejemplo" (quitar con datos reales) */
 const YEARS=[2012,2014,2016,2018,2020,2021,2022,2023,2024];
 const DIMS=[
- {name:"Confianza",desc:"Confianza en las instituciones y entre las personas.",series:[38,35,31,28,26,30,24,22,27],source:"por definir"},
- {name:"Desigualdad",desc:"Brechas de ingreso, de oportunidades y de reconocimiento.",series:[52,51,50,50,49,51,53,52,50],source:"por definir"},
- {name:"Territorio",desc:"Vínculo de las personas con el lugar y su entorno.",series:[40,42,41,44,46,45,48,47,50],source:"por definir"},
- {name:"Sustentabilidad",desc:"Valores y prácticas frente al medio ambiente.",series:[30,33,35,38,41,40,44,47,52],source:"por definir"},
- {name:"Colectivismo",desc:"Peso de lo colectivo frente a lo individual.",series:[45,44,46,45,47,50,49,52,51],source:"por definir"}
-];
-/* Cada cita: texto textual, autor/a o institución, publicación, año, enlace */
-const CITES=[
- {text:"Aquí irá un fragmento breve, copiado tal cual de la fuente.",who:"Autor/a o institución",pub:"Título de la publicación",year:"2024",url:"#"},
- {text:"Segundo fragmento de ejemplo, también textual y con enlace al original.",who:"Otro autor/a o institución",pub:"Título de otra publicación",year:"2023",url:"#"}
+ {id:"confianza",name:"Confianza",unit:"Índice 0–100 · serie de ejemplo",
+  desc:"Confianza en las instituciones y entre las personas.",
+  series:[38,35,31,28,26,30,24,22,27],
+  source:{inst:"Por definir",title:"Serie de confianza",year:"",url:"#"},
+  cites:[
+   {text:"Fragmento breve y textual sobre confianza, copiado tal cual de la fuente.",who:"Autor/a o institución",pub:"Publicación sobre confianza",year:"2024",url:"#",example:true},
+   {text:"Segundo fragmento de ejemplo sobre confianza interpersonal.",who:"Otro autor/a",pub:"Otra publicación",year:"2023",url:"#",example:true}]},
+ {id:"desigualdad",name:"Desigualdad",unit:"Índice 0–100 · serie de ejemplo",
+  desc:"Brechas de ingreso, de oportunidades y de reconocimiento.",
+  series:[52,51,50,50,49,51,53,52,50],
+  source:{inst:"Por definir",title:"Serie de desigualdad",year:"",url:"#"},
+  cites:[
+   {text:"Fragmento de ejemplo sobre desigualdad de ingresos y oportunidades.",who:"Autor/a o institución",pub:"Publicación sobre desigualdad",year:"2024",url:"#",example:true},
+   {text:"Fragmento de ejemplo sobre brechas de reconocimiento.",who:"Otro autor/a",pub:"Otra publicación",year:"2022",url:"#",example:true}]},
+ {id:"territorio",name:"Territorio",unit:"Índice 0–100 · serie de ejemplo",
+  desc:"Vínculo de las personas con el lugar y su entorno.",
+  series:[40,42,41,44,46,45,48,47,50],
+  source:{inst:"Por definir",title:"Serie de territorio",year:"",url:"#"},
+  cites:[
+   {text:"Fragmento de ejemplo sobre arraigo y vínculo con el lugar.",who:"Autor/a o institución",pub:"Publicación sobre territorio",year:"2023",url:"#",example:true},
+   {text:"Fragmento de ejemplo sobre identidad regional.",who:"Otro autor/a",pub:"Otra publicación",year:"2021",url:"#",example:true}]},
+ {id:"sustentabilidad",name:"Sustentabilidad",unit:"Índice 0–100 · serie de ejemplo",
+  desc:"Valores y prácticas frente al medio ambiente.",
+  series:[30,33,35,38,41,40,44,47,52],
+  source:{inst:"Por definir",title:"Serie de sustentabilidad",year:"",url:"#"},
+  cites:[
+   {text:"Fragmento de ejemplo sobre prácticas ambientales cotidianas.",who:"Autor/a o institución",pub:"Publicación sobre medio ambiente",year:"2024",url:"#",example:true},
+   {text:"Fragmento de ejemplo sobre valores frente al cambio climático.",who:"Otro autor/a",pub:"Otra publicación",year:"2023",url:"#",example:true}]},
+ {id:"colectivismo",name:"Colectivismo",unit:"Índice 0–100 · serie de ejemplo",
+  desc:"Peso de lo colectivo frente a lo individual.",
+  series:[45,44,46,45,47,50,49,52,51],
+  source:{inst:"Por definir",title:"Serie de colectivismo",year:"",url:"#"},
+  cites:[
+   {text:"Fragmento de ejemplo sobre comunidad y vida colectiva.",who:"Autor/a o institución",pub:"Publicación sobre colectivismo",year:"2024",url:"#",example:true},
+   {text:"Fragmento de ejemplo sobre individualismo y cooperación.",who:"Otro autor/a",pub:"Otra publicación",year:"2022",url:"#",example:true}]}
 ];
 /* ===================================================== */
 
 let cur=0;
 const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const link=(u,t)=>u&&u!=="#"?`<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`:t;
 const W=640,H=340,P={l:40,r:20,t:16,b:34};
 const X=i=>P.l+i*(W-P.l-P.r)/(YEARS.length-1);
 const Yv=v=>H-P.b-v/100*(H-P.t-P.b);
@@ -246,26 +265,31 @@ $("svg").addEventListener("pointermove",e=>drawChart(nearest(e)));
 $("svg").addEventListener("pointerleave",()=>drawChart());
 
 function render(){
-  const d=DIMS[cur];
-  $("ct").textContent=d.name;$("cd").textContent=d.desc;$("cs").textContent=d.source;
+  const d=DIMS[cur],s=d.source;
+  $("ct").textContent=d.name;$("cd").textContent=d.desc;$("cu").textContent=d.unit;$("cn").textContent=d.name;
+  const label=[s.inst,s.title,s.year].filter(Boolean).join(" · ");
+  $("cs").innerHTML="Fuente de la serie: "+link(s.url,esc(label||"por definir"))+(s.url&&s.url!=="#"?" ↗":"");
   drawChart();
   $("dims").innerHTML="";
   DIMS.forEach((x,i)=>{
     const b=document.createElement("button");b.className="dim";b.setAttribute("aria-pressed",i===cur);
-    b.innerHTML=`<div><b>${x.name}</b><span>${x.desc}</span></div><em>${x.series[x.series.length-1]}</em>`;
-    b.onclick=()=>{cur=i;render()};$("dims").appendChild(b);
+    b.innerHTML=`<div><b>${esc(x.name)}</b><span>${esc(x.desc)}</span></div><em>${x.series[x.series.length-1]}</em>`;
+    b.onclick=()=>{cur=i;render();history.replaceState(null,"","#cultura/"+x.id)};
+    $("dims").appendChild(b);
   });
-  $("cites").innerHTML=CITES.map(c=>`<article class="card cite"><blockquote>«${c.text}»</blockquote><div class="who">${c.who}<span class="tag">ejemplo</span></div><div class="where">${c.pub}, ${c.year} · <a href="${c.url}">Ver fuente ↗</a></div></article>`).join("");
+  $("cites").innerHTML=d.cites.map(c=>`<article class="card cite"><blockquote>«${esc(c.text)}»</blockquote><div class="who">${esc(c.who)}${c.example?'<span class="tag">ejemplo</span>':""}</div><div class="where">${esc(c.pub)}, ${esc(c.year)} · ${link(c.url,"Ver fuente ↗")}</div></article>`).join("");
 }
+
 const PAGES=["inicio","cultura","territorio","exportaciones"];
 function route(){
-  const h=location.hash.slice(1),p=PAGES.includes(h)?h:"inicio";
+  const [h,sub]=location.hash.slice(1).split("/"),p=PAGES.includes(h)?h:"inicio";
+  if(p==="cultura"){const i=DIMS.findIndex(x=>x.id===sub);if(i>=0&&i!==cur){cur=i;render()}}
   PAGES.forEach(n=>$("p-"+n).classList.toggle("on",n===p));
   document.querySelectorAll("nav a").forEach(a=>{
     if(a.getAttribute("href")==="#"+p)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
   });
   document.title=(p==="inicio"?"":p[0].toUpperCase()+p.slice(1)+" · ")+"Proyecto País";
-  window.scrollTo(0,0);
+  if(!sub)window.scrollTo(0,0);
 }
 addEventListener("hashchange",route);
 render();route();
