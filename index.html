@@ -19,7 +19,6 @@
   --line-strong: #cfc4b9;
   --accent: #2e6243;
   --accent-light: #eaf2eb;
-  --accent-hover: #234c34;
   --chart-line: #38734f;
   --chart-fill: rgba(56, 115, 79, 0.08);
   --shadow-sm: 0 1px 3px rgba(26,23,21,0.04);
@@ -36,7 +35,6 @@
     --line-strong: #423b36;
     --accent: #78b88f;
     --accent-light: #1b2e22;
-    --accent-hover: #91cba6;
     --chart-line: #78b88f;
     --chart-fill: rgba(120, 184, 143, 0.12);
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.25);
@@ -57,7 +55,6 @@ body{
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 
-/* Encabezado */
 header.top{
   position:sticky;
   top:0;
@@ -88,8 +85,7 @@ nav a[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow
   nav a{padding:6px 12px;font-size:11px}
 }
 
-/* Tipografía Hero */
-.hero{padding:72px 0 40px}
+.hero{padding:64px 0 36px}
 .eyebrow{
   display:inline-flex;
   align-items:center;
@@ -104,11 +100,11 @@ nav a[aria-current="page"]{background:var(--surface);color:var(--ink);box-shadow
 .eyebrow::before{content:"";width:18px;height:1.5px;background:var(--accent)}
 h1{
   font-family:"Instrument Serif",Georgia,serif;
-  font-size:clamp(46px,7.5vw,78px);
-  line-height:0.98;
+  font-size:clamp(44px,7.5vw,76px);
+  line-height:1.02;
   letter-spacing:-.03em;
   font-weight:400;
-  margin:0 0 20px;
+  margin:0 0 16px;
 }
 .lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:640px;margin:0;font-weight:400}
 .banner{
@@ -125,7 +121,12 @@ h1{
 }
 .banner span{width:6px;height:6px;border-radius:50%;background:var(--accent)}
 
-/* Layout Explorador */
+/* Visibilidad de páginas */
+.page{display:none}
+.page.on{display:block;animation:fade .2s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* Explorador */
 .explorer{
   display:grid;
   grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
@@ -140,7 +141,6 @@ h1{
   border:1px solid var(--line);
   border-radius:var(--r);
   box-shadow:var(--shadow-md);
-  transition:border-color .2s;
 }
 .chart{padding:28px}
 .chart-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
@@ -148,7 +148,7 @@ h1{
 .chart .unit{font-size:12px;font-weight:500;color:var(--muted);background:var(--bg);padding:4px 10px;border-radius:99px}
 .chart p.desc{margin:0 0 20px;color:var(--muted);font-size:15px}
 
-/* Segmented Control / Tabs */
+/* Segmented Tabs */
 .tabs-nav{
   display:flex;
   gap:4px;
@@ -166,12 +166,12 @@ h1{
   font-family:inherit;
   font-size:12px;
   font-weight:600;
-  padding:8px 12px;
+  padding:8px 10px;
   border-radius:8px;
   cursor:pointer;
   white-space:nowrap;
-  transition:all .15s ease;
   text-align:center;
+  transition:all .15s ease;
 }
 .tab-btn:hover{color:var(--ink)}
 .tab-btn.active{
@@ -180,18 +180,16 @@ h1{
   box-shadow:var(--shadow-sm);
   font-weight:700;
 }
+.tab-pane{display:none}
+.tab-pane.active{display:block;animation:fade .2s ease both}
 
-.tab-pane{display:none;animation:fade .25s ease both}
-.tab-pane.active{display:block}
-@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-
-/* Pestaña Gráfico */
+/* Gráfico */
 svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .readout{display:flex;gap:16px;align-items:baseline;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
 .readout b{font-family:"Instrument Serif",Georgia,serif;font-size:38px;line-height:1;color:var(--ink);font-weight:400}
 .readout span{font-size:13px;color:var(--muted);font-weight:500}
 
-/* Pestaña Hallazgo Clave */
+/* Contenido Pestañas */
 .insight-box{
   background:var(--accent-light);
   border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);
@@ -200,30 +198,15 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
   display:grid;
   gap:10px;
 }
-.insight-box h3{
-  margin:0;
-  font-size:11px;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--accent);
-  font-weight:700;
-}
-.insight-box p{
-  margin:0;
-  font-size:17px;
-  line-height:1.5;
-  color:var(--ink);
-  font-weight:500;
-}
+.insight-box h3{margin:0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.insight-box p{margin:0;font-size:16px;line-height:1.5;color:var(--ink);font-weight:500}
 
-/* Pestaña Ficha Técnica */
 .ficha-grid{display:grid;gap:16px}
 .ficha-row{display:grid;gap:4px;border-bottom:1px solid var(--line);padding-bottom:12px}
 .ficha-row:last-child{border-bottom:none;padding-bottom:0}
 .ficha-row span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700}
 .ficha-row p{margin:0;font-size:14px;color:var(--ink);line-height:1.5}
 
-/* Pestaña Fuente y Auditoría */
 .src-pane{display:grid;gap:18px}
 .src-group span{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin-bottom:6px}
 .src-group a{color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:4px}
@@ -242,9 +225,6 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .audit-chip i{width:6px;height:6px;border-radius:50%;background:var(--accent)}
 .btn-csv{
   align-self:start;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
   background:var(--ink);
   color:var(--bg);
   border:none;
@@ -253,7 +233,6 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
   font-family:inherit;
   font-size:12px;
   font-weight:600;
-  letter-spacing:.03em;
   cursor:pointer;
   transition:all .15s ease;
 }
@@ -321,15 +300,9 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
   letter-spacing:.06em;
 }
 
-/* Secciones Home */
-.page{display:none}.page.on{display:block}
+/* Home tiles */
 .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:20px;padding:12px 0 32px}
-.tile{
-  display:block;
-  padding:28px;
-  border-radius:var(--r);
-  transition:all .2s ease;
-}
+.tile{display:block;padding:28px;border-radius:var(--r);transition:all .2s ease}
 .tile:hover{transform:translateY(-3px);border-color:var(--line-strong)}
 .tile small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
 .tile h3{margin:8px 0;font-size:26px;font-family:"Instrument Serif",Georgia,serif;font-weight:400}
@@ -343,7 +316,6 @@ svg{width:100%;height:auto;display:block;touch-action:pan-y}
 .soon h2{margin:0 0 8px;font-size:22px;font-weight:600}
 .soon p{margin:0;color:var(--muted)}
 
-/* Footer */
 footer{border-top:1px solid var(--line);padding:40px 0 54px;color:var(--muted);font-size:13px}
 footer .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px}
 footer h4{margin:0 0 8px;color:var(--ink);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
@@ -366,7 +338,7 @@ footer p{margin:0;line-height:1.6}
 
 <main class="wrap">
 
-  <div class="page" id="p-inicio">
+  <div class="page on" id="p-inicio">
     <section class="hero">
       <div class="eyebrow">Proyecto País</div>
       <h1>Chile, descrito con datos y fuentes verificadas</h1>
@@ -401,7 +373,7 @@ footer p{margin:0;line-height:1.6}
         </div>
         <p class="desc" id="cd"></p>
 
-        <!-- Navegación por pestañas tipo control segmentado -->
+        <!-- Segmented Control Tabs -->
         <nav class="tabs-nav" role="tablist" aria-label="Vistas del indicador">
           <button class="tab-btn active" role="tab" data-tab="grafico" aria-selected="true">Gráfico</button>
           <button class="tab-btn" role="tab" data-tab="hallazgo" aria-selected="false">Hallazgo clave</button>
@@ -409,13 +381,13 @@ footer p{margin:0;line-height:1.6}
           <button class="tab-btn" role="tab" data-tab="fuente" aria-selected="false">Fuente y datos</button>
         </nav>
 
-        <!-- Tab 1: Gráfico -->
+        <!-- Pestaña 1: Gráfico -->
         <div class="tab-pane active" id="pane-grafico" role="tabpanel">
           <svg id="svg" viewBox="0 0 640 330" role="img" aria-labelledby="ct"></svg>
           <div class="readout" aria-live="polite"><b id="rv"></b><span id="ry"></span></div>
         </div>
 
-        <!-- Tab 2: Hallazgo clave -->
+        <!-- Pestaña 2: Hallazgo clave -->
         <div class="tab-pane" id="pane-hallazgo" role="tabpanel">
           <div class="insight-box">
             <h3>Diagnóstico temporal</h3>
@@ -423,12 +395,12 @@ footer p{margin:0;line-height:1.6}
           </div>
         </div>
 
-        <!-- Tab 3: Ficha técnica -->
+        <!-- Pestaña 3: Ficha técnica -->
         <div class="tab-pane" id="pane-ficha" role="tabpanel">
           <div class="ficha-grid" id="c-ficha"></div>
         </div>
 
-        <!-- Tab 4: Fuente y auditoría -->
+        <!-- Pestaña 4: Fuente -->
         <div class="tab-pane" id="pane-fuente" role="tabpanel">
           <div class="src-pane">
             <div class="src-group">
@@ -559,118 +531,145 @@ const DIMS=[
 
 let cur=0,open=true;
 const $=id=>document.getElementById(id);
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&","<":"<",">":">",'"':""","'":"'"}[c]));
+const esc=s=>String(s||"").replace(/[&<>"']/g,c=>({"&":"&","<":"<",">":">",'"':""","'":"'"}[c]));
 const link=(u,t)=>u&&u!=="#"?`<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`:t;
 const W=640,H=330,P={l:36,r:20,t:18,b:34};
 const X=i=>P.l+i*(W-P.l-P.r)/(YEARS.length-1);
 const Yv=v=>H-P.b-v/100*(H-P.t-P.b);
 
 function drawChart(hover){
+  const svgEl = $("svg");
+  if (!svgEl) return;
   const d=DIMS[cur],last=d.series.length-1,idx=hover??last;
   let g="";
-  // Guías de eje Y
   [0,25,50,75,100].forEach(t=>{
     g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Yv(t)}" y2="${Yv(t)}" stroke="var(--line)" stroke-dasharray="2 3"/><text x="${P.l-8}" y="${Yv(t)+4}" font-size="10.5" font-weight="500" text-anchor="end" fill="var(--muted)">${t}</text>`;
   });
-  // Eje X
   YEARS.forEach((y,i)=>{
     g+=`<text x="${X(i)}" y="${H-12}" font-size="11" font-weight="500" text-anchor="middle" fill="${i===idx?'var(--ink)':'var(--muted)'}">${y}</text>`;
   });
   const pts=d.series.map((v,i)=>`${X(i)},${Yv(v)}`).join(" ");
-  // Área y línea
   g+=`<polygon points="${X(0)},${Yv(0)} ${pts} ${X(last)},${Yv(0)}" fill="var(--chart-fill)"/>`;
   g+=`<polyline points="${pts}" fill="none" stroke="var(--chart-line)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`;
-  // Línea guía activa
   g+=`<line x1="${X(idx)}" x2="${X(idx)}" y1="${P.t}" y2="${H-P.b}" stroke="var(--ink)" stroke-dasharray="3 3" opacity=".35"/>`;
-  // Puntos interactivos
   d.series.forEach((v,i)=>{
     const isAct=i===idx;
     g+=`<circle cx="${X(i)}" cy="${Yv(v)}" r="${isAct?6.5:4}" fill="${isAct?'var(--accent)':'var(--surface)'}" stroke="var(--chart-line)" stroke-width="${isAct?3:2}"/>`;
   });
-  $("svg").innerHTML=g;
-  $("rv").textContent=d.series[idx];
-  $("ry").textContent=`índice en ${YEARS[idx]}`;
+  svgEl.innerHTML=g;
+  if ($("rv")) $("rv").textContent=d.series[idx];
+  if ($("ry")) $("ry").textContent=`índice en ${YEARS[idx]}`;
 }
 
 function nearest(e){
-  const r=$("svg").getBoundingClientRect(),x=(e.clientX-r.left)/r.width*W;
+  const svgEl = $("svg");
+  if (!svgEl) return 0;
+  const r=svgEl.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*W;
   let b=0;YEARS.forEach((_,i)=>{if(Math.abs(X(i)-x)<Math.abs(X(b)-x))b=i});return b;
 }
-$("svg").addEventListener("pointermove",e=>drawChart(nearest(e)));
-$("svg").addEventListener("pointerleave",()=>drawChart());
-
-function downloadCSV(){
-  const d=DIMS[cur];
-  let csv="Año,Valor,Dimension\n";
-  YEARS.forEach((y,i)=>{ csv+=`${y},${d.series[i]},"${d.name}"\n`; });
-  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;
-  a.download=`${d.id}_chile_datos.csv`;
-  a.click();
+if ($("svg")) {
+  $("svg").addEventListener("pointermove",e=>drawChart(nearest(e)));
+  $("svg").addEventListener("pointerleave",()=>drawChart());
 }
-$("btn-csv").addEventListener("click",downloadCSV);
 
-// Evento de Pestañas
+if ($("btn-csv")) {
+  $("btn-csv").addEventListener("click",()=>{
+    const d=DIMS[cur];
+    let csv="Año,Valor,Dimension\n";
+    YEARS.forEach((y,i)=>{ csv+=`${y},${d.series[i]},"${d.name}"\n`; });
+    const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement("a");
+    a.href=url;
+    a.download=`${d.id}_chile_datos.csv`;
+    a.click();
+  });
+}
+
 document.querySelectorAll(".tab-btn").forEach(btn=>{
   btn.addEventListener("click",()=>{
     document.querySelectorAll(".tab-btn").forEach(b=>{b.classList.remove("active");b.setAttribute("aria-selected","false")});
     document.querySelectorAll(".tab-pane").forEach(p=>p.classList.remove("active"));
     btn.classList.add("active");
     btn.setAttribute("aria-selected","true");
-    $("pane-"+btn.dataset.tab).classList.add("active");
+    const target = $("pane-"+btn.dataset.tab);
+    if (target) target.classList.add("active");
     if(btn.dataset.tab==="grafico") drawChart();
   });
 });
 
 function render(){
   const d=DIMS[cur],s=d.source;
-  $("ct").textContent=d.name;
-  $("cd").textContent=d.desc;
-  $("cu").textContent=d.unit;
-  $("ci").textContent=d.insight;
+  if ($("ct")) $("ct").textContent=d.name;
+  if ($("cd")) $("cd").textContent=d.desc;
+  if ($("cu")) $("cu").textContent=d.unit;
+  if ($("ci")) $("ci").textContent=d.insight;
   
   const label=[s.inst,s.title,s.year].filter(Boolean).join(" · ");
-  $("cs").innerHTML=link(s.url,esc(label||"por definir"))+(s.url&&s.url!=="#"?" ↗":"");
-  $("c-audit").textContent="Revisado el "+(s.checked||"recientemente");
+  if ($("cs")) $("cs").innerHTML=link(s.url,esc(label||"por definir"))+(s.url&&s.url!=="#"?" ↗":"");
+  if ($("c-audit")) $("c-audit").textContent="Revisado el "+(s.checked||"recientemente");
 
-  $("c-ficha").innerHTML=`
-    <div class="ficha-row"><span>Qué mide</span><p>${esc(d.ficha.mide)}</p></div>
-    <div class="ficha-row"><span>Escala y unidad</span><p>${esc(d.ficha.escala)}</p></div>
-    <div class="ficha-row"><span>Cálculo</span><p>${esc(d.ficha.calculo)}</p></div>
-    <div class="ficha-row"><span>Criterio de selección</span><p>${esc(d.ficha.porque)}</p></div>
-  `;
+  if ($("c-ficha")) {
+    $("c-ficha").innerHTML=`
+      <div class="ficha-row"><span>Qué mide</span><p>${esc(d.ficha.mide)}</p></div>
+      <div class="ficha-row"><span>Escala y unidad</span><p>${esc(d.ficha.escala)}</p></div>
+      <div class="ficha-row"><span>Cálculo</span><p>${esc(d.ficha.calculo)}</p></div>
+      <div class="ficha-row"><span>Criterio de selección</span><p>${esc(d.ficha.porque)}</p></div>
+    `;
+  }
 
   drawChart();
-  $("dims").innerHTML=DIMS.map((x,i)=>{
-    const on=i===cur&&open;
-    return `<div class="item"><button class="dim" data-i="${i}" aria-pressed="${i===cur}" aria-expanded="${on}" aria-controls="pn-${x.id}"><div><b>${esc(x.name)}</b><span>${esc(x.desc)}</span></div><em>${x.cites.length} fuentes ${on?"▴":"▾"}</em></button>`+
-    (on?`<div class="panel" id="pn-${x.id}" role="region" aria-label="Fuentes de ${esc(x.name)}">`+x.cites.map(c=>`<article class="card cite"><blockquote>«${esc(c.text)}»</blockquote><div class="who">${esc(c.who)}${c.example?'<span class="tag">ejemplo</span>':""}</div><div class="where">${esc(c.pub)}, ${esc(c.year)} · ${link(c.url,"Ver fuente ↗")}</div></article>`).join("")+`</div>`:"")+`</div>`;
-  }).join("");
+  if ($("dims")) {
+    $("dims").innerHTML=DIMS.map((x,i)=>{
+      const on=i===cur&&open;
+      return `<div class="item"><button class="dim" data-i="${i}" aria-pressed="${i===cur}" aria-expanded="${on}" aria-controls="pn-${x.id}"><div><b>${esc(x.name)}</b><span>${esc(x.desc)}</span></div><em>${x.cites.length} fuentes ${on?"▴":"▾"}</em></button>`+
+      (on?`<div class="panel" id="pn-${x.id}" role="region" aria-label="Fuentes de ${esc(x.name)}">`+x.cites.map(c=>`<article class="card cite"><blockquote>«${esc(c.text)}»</blockquote><div class="who">${esc(c.who)}${c.example?'<span class="tag">ejemplo</span>':""}</div><div class="where">${esc(c.pub)}, ${esc(c.year)} · ${link(c.url,"Ver fuente ↗")}</div></article>`).join("")+`</div>`:"")+`</div>`;
+    }).join("");
+  }
 }
 
-$("dims").addEventListener("click",e=>{
-  const b=e.target.closest(".dim");if(!b)return;
-  const i=+b.dataset.i;
-  open=i===cur?!open:true;cur=i;render();
-  history.replaceState(null,"","#cultura"+(open?"/"+DIMS[cur].id:""));
-  $("dims").querySelector(`[data-i="${i}"]`).focus();
-});
+if ($("dims")) {
+  $("dims").addEventListener("click",e=>{
+    const b=e.target.closest(".dim");if(!b)return;
+    const i=+b.dataset.i;
+    open=i===cur?!open:true;cur=i;render();
+    history.replaceState(null,"","#cultura"+(open?"/"+DIMS[cur].id:""));
+    const focusBtn = $("dims").querySelector(`[data-i="${i}"]`);
+    if (focusBtn) focusBtn.focus();
+  });
+}
 
 const PAGES=["inicio","cultura","territorio","exportaciones"];
 function route(){
-  const [h,sub]=location.hash.slice(1).split("/"),p=PAGES.includes(h)?h:"inicio";
-  if(p==="cultura"){const i=DIMS.findIndex(x=>x.id===sub);if(i>=0&&(i!==cur||!open)){cur=i;open=true;render()}}
-  PAGES.forEach(n=>$("p-"+n).classList.toggle("on",n===p));
-  document.querySelectorAll("nav a").forEach(a=>{
-    if(a.getAttribute("href")==="#"+p)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
+  const hash = location.hash ? location.hash.slice(1) : "";
+  const [h,sub]=hash.split("/");
+  // Si no hay hash o la ruta no existe, abre por defecto 'inicio'
+  const p=PAGES.includes(h)?h:"inicio";
+
+  if(p==="cultura"){
+    const i=DIMS.findIndex(x=>x.id===sub);
+    if(i>=0&&(i!==cur||!open)){cur=i;open=true;render();}
+  }
+
+  PAGES.forEach(n=>{
+    const pageEl = $("p-"+n);
+    if (pageEl) pageEl.classList.toggle("on", n===p);
   });
-  document.title=(p==="inicio"?"":p[0].toUpperCase()+p.slice(1)+" · ")+"Proyecto País";
-  if(!sub)window.scrollTo(0,0);
+
+  document.querySelectorAll("nav a").forEach(a=>{
+    if(a.getAttribute("href")==="#"+p) a.setAttribute("aria-current","page");
+    else a.removeAttribute("aria-current");
+  });
+
+  document.title=(p==="inicio"?"Inicio · ":p[0].toUpperCase()+p.slice(1)+" · ")+"Proyecto País";
+  if(!sub) window.scrollTo(0,0);
 }
-addEventListener("hashchange",route);
-render();route();
+
+window.addEventListener("hashchange",route);
+
+// Render inicial y ruteo
+render();
+route();
 </script>
 </body>
 </html>
