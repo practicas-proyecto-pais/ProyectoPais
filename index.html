@@ -38,15 +38,14 @@ nav a:hover{color:var(--ink)}
 nav a[aria-current="page"]{background:var(--ink);color:var(--bg)}
 @media(max-width:640px){.bar{height:auto;flex-wrap:wrap;padding:10px 0}nav{width:100%;overflow-x:auto}nav a{padding:8px 10px;font-size:12px}}
 
-.hero{padding:64px 0 36px}
+.hero{padding:36px 0 20px}
 .eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 14px}
-h1{font-size:clamp(38px,6.5vw,68px);line-height:1.02;letter-spacing:-.02em;margin:0 0 16px;font-weight:700}
-.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:620px;margin:0}
-.banner{display:inline-flex;gap:8px;align-items:center;margin-top:24px;padding:6px 14px;border-radius:99px;background:var(--accent-soft);font-size:13px}
+h1{font-size:clamp(26px,4vw,36px);line-height:1.15;letter-spacing:-.015em;margin:0 0 10px;font-weight:700}
+.lead{font-size:16px;color:var(--muted);max-width:620px;margin:0}
+.banner{display:inline-flex;gap:8px;align-items:center;margin-top:16px;padding:5px 12px;border-radius:99px;background:var(--accent-soft);font-size:13px}
 
 .ovw{padding:0 0 8px}
-.ovw h2{margin:0 0 4px;font-size:22px;letter-spacing:-.01em}
-.ovw p{margin:0 0 16px;color:var(--muted);font-size:15px;max-width:640px}
+.ovw p{margin:0 0 12px;color:var(--muted);font-size:14px;max-width:640px}
 .ovg{display:grid;grid-template-columns:repeat(auto-fill,minmax(176px,1fr));gap:12px}
 .ov{display:grid;gap:6px;align-content:start;text-decoration:none;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;cursor:pointer;transition:border-color .15s}
 .ov:hover{border-color:var(--accent)}
@@ -60,7 +59,7 @@ h1{font-size:clamp(38px,6.5vw,68px);line-height:1.02;letter-spacing:-.02em;margi
 .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
 .chart{padding:24px}
 .chart-head{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
-.chart h2{margin:0;font-size:22px;letter-spacing:-.01em}
+.chart h1{margin:0;font-size:22px;letter-spacing:-.01em;line-height:1.2}
 .chart .unit{font-size:13px;color:var(--muted)}
 .chart p.desc{margin:6px 0 10px;color:var(--muted);font-size:15px}
 svg{width:100%;height:auto;display:block;touch-action:pan-y}
@@ -104,19 +103,25 @@ footer p{margin:0}
 .tile{display:block;padding:26px;text-decoration:none;transition:transform .15s,border-color .15s}
 .tile:hover{transform:translateY(-3px);border-color:var(--accent)}
 .tile small{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:700}
-.tile h3{margin:8px 0;font-size:28px;letter-spacing:-.01em}
+.tile h3{margin:8px 0;font-size:22px;letter-spacing:-.01em}
 .tile p{margin:0 0 18px;color:var(--muted);font-size:15px}
 .tile span{font-weight:700;font-size:14px}
 .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;padding:32px 0 56px}
 .how b{display:block;font-size:13px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
 .how p{margin:0;color:var(--muted);font-size:15px}
 .soon{padding:32px;margin:12px 0 56px}
-.soon h2{margin:0 0 8px;font-size:22px}.soon p{margin:0;color:var(--muted)}
-.hero.s{padding:40px 0 24px}.hero.s h1{font-size:clamp(32px,5vw,48px)}.hero.s .lead{font-size:clamp(16px,1.8vw,18px)}
-.back{display:inline-block;margin:28px 0 0;font-size:14px;color:var(--muted);text-underline-offset:3px}.back:hover{color:var(--ink)}
+.soon h2{margin:0 0 8px;font-size:18px}.soon p{margin:0;color:var(--muted)}
+.back{display:inline-block;margin:20px 0 0;font-size:14px;color:var(--muted);text-underline-offset:3px}.back:hover{color:var(--ink)}
 .explorer{padding-top:16px}
 .chart details.ficha{border-top:1px solid var(--line);padding-top:10px;margin-top:12px}
 .chart .hit{margin:8px 0 0}
+.how-to{border-left:3px solid var(--accent);padding:2px 0 2px 16px;margin:0 0 24px;max-width:640px}
+.how-to h2{margin:0 0 6px;font-size:16px}
+.how-to ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px}
+.how-to a,.scale a{color:var(--accent);text-underline-offset:3px}
+.scale{margin:0 0 10px;font-size:14px;color:var(--muted)}
+.met{display:grid;gap:16px;max-width:760px;padding-bottom:56px}
+.met h2{margin:0 0 8px;font-size:18px}.met p{margin:0;color:var(--muted);font-size:15px}
 </style>
 </head>
 <body>
@@ -129,6 +134,7 @@ footer p{margin:0}
       <a href="#cultura">Cultura</a>
       <a href="#territorio">Territorio</a>
       <a href="#exportaciones">Exportaciones</a>
+      <a href="#metodologia">Metodología</a>
     </nav>
   </div>
 </header>
@@ -137,8 +143,7 @@ footer p{margin:0}
 
   <div class="page" id="p-inicio">
     <section class="hero">
-      <p class="eyebrow">Proyecto País</p>
-      <h1>Chile, descrito con datos y fuentes verificadas</h1>
+      <h1>Chile, con datos y fuentes verificadas</h1>
       <p class="lead">Una plataforma para explorar cómo es el país: su cultura, su territorio y lo que exporta, siempre con la fuente a la vista.</p>
       <div class="banner">Versión de maqueta: los datos y las citas son de ejemplo</div>
     </section>
@@ -158,13 +163,19 @@ footer p{margin:0}
 
     <div id="v-list">
       <section class="hero s">
-        <p class="eyebrow">Cultura</p>
-        <h1>La cultura chilena en once dimensiones</h1>
-        <p class="lead">Elige una dimensión para ver su serie de datos y las citas que la describen.</p>
+        <h1>Cultura</h1>
+        <p class="lead">Once dimensiones. Elige una para ver su serie de datos y sus citas.</p>
         <div class="banner">Versión de maqueta: los datos y las citas son de ejemplo</div>
       </section>
-      <section class="ovw" aria-labelledby="oh">
-        <h2 id="oh">Las once dimensiones de un vistazo</h2>
+      <section class="how-to" aria-label="Cómo leer los puntajes">
+        <h2>Cómo leer los puntajes</h2>
+        <ul>
+          <li>Cada dimensión va de 0 a 100. Cada una define qué significan el 0 y el 100.</li>
+          <li>Más alto no es mejor ni peor: indica más de lo que la dimensión mide.</li>
+          <li>El cambio se cuenta en puntos, entre el primer y el último año de la serie. <a href="#metodologia">Ver metodología</a></li>
+        </ul>
+      </section>
+      <section class="ovw" aria-label="Las once dimensiones">
         <p id="ovd"></p>
         <div class="ovg" id="ovg" role="group" aria-label="Las once dimensiones"></div>
       </section>
@@ -180,8 +191,9 @@ footer p{margin:0}
       <a class="back" href="#cultura">← Todas las dimensiones</a>
       <section class="explorer" id="ex" aria-label="Explorador de la dimensión">
         <div class="card chart">
-          <div class="chart-head"><h2 id="ct" tabindex="-1"></h2><span class="unit" id="cu"></span></div>
+          <div class="chart-head"><h1 id="ct" tabindex="-1"></h1><span class="unit" id="cu"></span></div>
           <p class="desc" id="cd"></p>
+          <p class="scale" id="cz"></p>
           <p class="key" id="ck"></p>
           <svg id="svg" viewBox="0 0 640 340" role="img" aria-labelledby="ct"></svg>
           <div class="readout" aria-live="polite"><b id="rv"></b><span id="ry"></span><span id="rc"></span></div>
@@ -203,8 +215,7 @@ footer p{margin:0}
 
   <div class="page" id="p-territorio">
     <section class="hero">
-      <p class="eyebrow">Territorio</p>
-      <h1>El territorio chileno</h1>
+      <h1>Territorio</h1>
       <p class="lead">Cómo se distribuye y se habita el país: geografía, regiones y recursos.</p>
     </section>
     <div class="card soon"><h2>En construcción</h2><p>Esta sección se desarrollará después de Cultura.</p></div>
@@ -212,18 +223,30 @@ footer p{margin:0}
 
   <div class="page" id="p-exportaciones">
     <section class="hero">
-      <p class="eyebrow">Exportaciones</p>
-      <h1>Lo que Chile vende al mundo</h1>
+      <h1>Exportaciones</h1>
       <p class="lead">Qué productos se exportan, a quién y cómo ha cambiado en el tiempo.</p>
     </section>
     <div class="card soon"><h2>En construcción</h2><p>Esta sección se desarrollará después de Cultura.</p></div>
+  </div>
+
+  <div class="page" id="p-metodologia">
+    <section class="hero">
+      <h1>Metodología</h1>
+      <p class="lead">Cómo se lee cada puntaje y qué fuentes se aceptan.</p>
+    </section>
+    <div class="met">
+      <section class="card box"><h2>Qué significa un puntaje</h2><p>Cada dimensión se muestra en una escala de 0 a 100. El 0 y el 100 son los extremos posibles de esa dimensión, y cada una indica qué significan. Un puntaje más alto solo indica que hay más de lo que la dimensión mide; no quiere decir que sea mejor ni peor.</p></section>
+      <section class="card box"><h2>Cómo se calcula</h2><p>Si la fuente entrega una proporción (por ejemplo, el porcentaje de personas que responde de cierta manera), se mostrará tal cual. Si se combinan varias preguntas en un índice, se indicará cuáles, cómo se reescalan a 0–100 y qué peso tiene cada una. En esta maqueta los puntajes son de ejemplo y no vienen de ninguna fuente.</p></section>
+      <section class="card box"><h2>Fuentes aceptadas</h2><p>Solo instituciones y publicaciones de una lista cerrada, con enlace directo al documento original y fecha de consulta. Las citas serán fragmentos textuales breves, con autor y enlace.</p></section>
+      <section class="card box"><h2>Límites de los datos</h2><p>Las series pueden venir de encuestas distintas, con años y preguntas diferentes, y los cambios pequeños pueden caer dentro del margen de error. Cada indicador informará su año, el tamaño de la muestra y el margen de error cuando la fuente los entregue.</p></section>
+    </div>
   </div>
 
 </main>
 
 <footer>
   <div class="wrap cols">
-    <div><h4>Metodología</h4><p>Cada indicador indicará su fuente, año y definición. Las citas serán fragmentos textuales breves, con enlace al documento original.</p></div>
+    <div><h4>Metodología</h4><p>Cada indicador indicará su fuente, año y definición. Las citas serán fragmentos textuales breves, con enlace al documento original. <a href="#metodologia">Ver metodología</a></p></div>
     <div><h4>Fuentes</h4><p>Solo se aceptarán fuentes de una lista cerrada de instituciones y publicaciones verificables.</p></div>
     <div><h4>Estado</h4><p>Maqueta en desarrollo. Territorio y Exportaciones se incorporarán más adelante.</p></div>
   </div>
@@ -273,7 +296,8 @@ const GROUPS=[["Total",0],["18–29 años",5],["30–59 años",-1],["60+ años",
 const EVENTS={2020:"Pandemia de COVID-19",2022:"Plebiscito constitucional de salida"};
 const REL={confianza:["desigualdad","colectivismo"],desigualdad:["confianza","territorio"],territorio:["sustentabilidad","pueblos"],sustentabilidad:["territorio","colectivismo"],colectivismo:["confianza","participacion"],pueblos:["territorio","patrimonio"],religiosidad:["colectivismo","participacion"],participacion:["patrimonio","colectivismo"],patrimonio:["pueblos","gastronomia"],gastronomia:["patrimonio","territorio"],deporte:["participacion","colectivismo"]};
 const GLOS=[["Índice 0–100","Serie reescalada para poder compararla: 0 es el mínimo posible y 100 el máximo."],["Confianza","Grado en que las personas esperan buena fe de otras personas o de las instituciones."],["Desigualdad","Diferencias sistemáticas entre grupos en ingresos, oportunidades o reconocimiento."],["Colectivismo","Peso que se da a la comunidad y a los grupos frente a las metas individuales."],["Sustentabilidad","Satisfacer las necesidades actuales sin comprometer las de generaciones futuras."]];
-const FICHA=[["mide","Qué mide"],["escala","Escala"],["anios","Años"],["metodo","Cómo se calculó"],["porque","Por qué se eligió"]];
+const EXT={confianza:["nadie confía","todas las personas confían"],desigualdad:["sin brechas entre grupos","brechas máximas"],territorio:["sin vínculo con el lugar","vínculo máximo"],sustentabilidad:["ningún valor ambiental","valor ambiental pleno"],colectivismo:["predomina lo individual","predomina lo colectivo"],pueblos:["sin vitalidad cultural indígena","vitalidad plena"],religiosidad:["nadie practica una religión","todas las personas la practican"],participacion:["nadie participa","todas las personas participan"],patrimonio:["ninguna valoración","valoración plena"],gastronomia:["ninguna práctica en común","práctica generalizada"],deporte:["nadie practica deporte","todas las personas practican"]}; /* definiciones de ejemplo */
+const FICHA=[["anios","Años"],["metodo","Cómo se calculó"],["porque","Por qué se eligió"]];
 DIMS.forEach(d=>{d.ficha={mide:"Por definir",escala:"Índice 0–100",anios:"2012–2024",metodo:"Por definir",porque:"Por definir",...d.ficha};d.source={consulted:"por definir",status:"por verificar",...d.source}});
 /* ===================================================== */
 
@@ -293,6 +317,8 @@ function drawChart(hover){
   let g="";
   [0,25,50,75,100].forEach(t=>g+=`<line x1="${P.l}" x2="${W-P.r}" y1="${Yv(t)}" y2="${Yv(t)}" stroke="var(--line)"/><text x="${P.l-8}" y="${Yv(t)+4}" font-size="11" text-anchor="end" fill="var(--muted)">${t}</text>`);
   YEARS.forEach((y,i)=>g+=`<text x="${X(i)}" y="${H-10}" font-size="11" text-anchor="middle" fill="var(--muted)">${y}</text>`);
+  const [lo,hi]=EXT[d.id]||["",""];
+  g+=`<text x="${P.l+6}" y="${Yv(100)+14}" font-size="10" fill="var(--muted)">100 = ${esc(hi)}</text><text x="${P.l+6}" y="${Yv(0)-6}" font-size="10" fill="var(--muted)">0 = ${esc(lo)}</text>`;
   Object.keys(EVENTS).forEach((y,n)=>{const i=YEARS.indexOf(+y);if(i>=0)g+=`<line x1="${X(i)}" x2="${X(i)}" y1="${P.t}" y2="${H-P.b}" stroke="var(--accent)" stroke-opacity=".35"/><text x="${X(i)}" y="11" font-size="10" text-anchor="middle" fill="var(--accent)">${n+1}</text>`});
   const pts=s.map((v,i)=>`${X(i)},${Yv(v)}`).join(" ");
   if(o)g+=`<polyline points="${o.map((v,i)=>`${X(i)},${Yv(v)}`).join(" ")}" fill="none" stroke="var(--muted)" stroke-width="2.5" stroke-dasharray="6 5"/>`;
@@ -324,7 +350,7 @@ function renderOv(){
 function render(){
   const d=DIMS[cur],s=d.source,f=d.ficha;
   if(cmp===cur)cmp=-1;
-  $("ct").textContent=d.name;$("cd").textContent=d.desc;$("cu").textContent=d.unit+(grp?" · desglose de ejemplo":"");
+  $("ct").textContent=d.name;$("cd").textContent=d.desc;const [lo,hi]=EXT[d.id]||["por definir","por definir"];$("cz").innerHTML=`Escala: 0 = ${esc(lo)} · 100 = ${esc(hi)}. Más alto no es mejor ni peor. <a href="#metodologia">Cómo se calcula</a>`;$("cu").textContent=d.unit+(grp?" · desglose de ejemplo":"");
   $("ck").textContent=key(d,sv(d));
   $("cmp").innerHTML='<option value="-1">Ninguna</option>'+DIMS.map((x,i)=>i===cur?"":`<option value="${i}"${i===cmp?" selected":""}>${esc(x.name)}</option>`).join("");
   $("ch").textContent="Hitos: "+Object.entries(EVENTS).map(([y,t],n)=>`${n+1}. ${y} ${t}`).join(" · ")+" (ejemplo: falta la fuente de cada hito)";
@@ -360,7 +386,7 @@ function renderAll(){
 $("fd").onchange=$("fq").oninput=renderAll;
 renderAll();
 
-const PAGES=["inicio","cultura","territorio","exportaciones"];
+const PAGES=["inicio","cultura","territorio","exportaciones","metodologia"];
 function route(){
   const [h,sub]=location.hash.slice(1).split("/"),p=PAGES.includes(h)?h:"inicio";
   const i=p==="cultura"?DIMS.findIndex(x=>x.id===sub):-1;
@@ -370,7 +396,7 @@ function route(){
   document.querySelectorAll("nav a").forEach(a=>{
     if(a.getAttribute("href")==="#"+p)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
   });
-  document.title=(i>=0?DIMS[i].name+" · ":"")+(p==="inicio"?"":p[0].toUpperCase()+p.slice(1)+" · ")+"Proyecto País";
+  document.title=(i>=0?DIMS[i].name+" · ":"")+(p==="inicio"?"":(p==="metodologia"?"Metodología":p[0].toUpperCase()+p.slice(1))+" · ")+"Proyecto País";
   window.scrollTo(0,0);
   if(i>=0)$("ct").focus({preventScroll:true});
 }
