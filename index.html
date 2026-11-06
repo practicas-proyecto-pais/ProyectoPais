@@ -146,9 +146,7 @@ footer p{margin:0}
     <a class="brand" href="#inicio"><i></i>Proyecto País</a>
     <nav aria-label="Secciones">
       <a href="#inicio">Inicio</a>
-      <a href="#cultura">Cultura</a>
-      <a href="#territorios">Territorios</a>
-      <a href="#exportaciones">Exportaciones</a>
+      <a href="#analisis">Análisis</a>
       <a href="#metodologia">Metodología</a>
     </nav>
   </div>
@@ -169,9 +167,18 @@ footer p{margin:0}
     </section>
   </div>
 
+  <div class="page" id="p-analisis">
+    <section class="hero s">
+      <h1>Análisis</h1>
+      <p class="lead">Elige un área para explorar sus datos y fuentes.</p>
+    </section>
+    <section class="tiles" id="tiles2" aria-label="Áreas de análisis"></section>
+  </div>
+
   <div class="page" id="p-cultura">
 
     <div id="v-list">
+      <a class="back" href="#analisis">← Análisis</a>
       <section class="hero s">
         <h1>Cultura</h1>
         <p class="lead">Once dimensiones. Elige una para ver su serie de datos y sus citas.</p>
@@ -223,6 +230,7 @@ footer p{margin:0}
   </div>
 
   <div class="page" id="p-pronto">
+    <a class="back" href="#analisis">← Análisis</a>
     <section class="hero">
       <h1 id="pt"></h1>
       <p class="lead" id="pl"></p>
@@ -233,6 +241,7 @@ footer p{margin:0}
   <div class="page" id="p-territorios">
 
     <div id="v-tl">
+      <a class="back" href="#analisis">← Análisis</a>
       <section class="hero">
         <h1>Territorios</h1>
         <p class="lead">Estudio a partir del Índice de Competitividad de Ciudades (ICC) 2016, con 27 unidades territoriales.</p>
@@ -456,8 +465,8 @@ const SECS=[
  {id:"tecnologia",name:"Tecnología"},
  {id:"democracia",name:"Democracia"}
 ];
-$("tiles").innerHTML=SECS.map(x=>`<a class="card tile${x.desc?"":" nd"}" href="#${x.id}"><small>${x.ready?"Disponible":"En construcción"}</small><h3>${esc(x.name)}</h3>${x.desc?`<p>${esc(x.desc)}</p>`:""}<span>${x.ready?"Explorar →":"Ver →"}</span></a>`).join("");
-const PAGES=["inicio","metodologia",...SECS.map(x=>x.id)];
+$("tiles").innerHTML=$("tiles2").innerHTML=SECS.map(x=>`<a class="card tile${x.desc?"":" nd"}" href="#${x.id}"><small>${x.ready?"Disponible":"En construcción"}</small><h3>${esc(x.name)}</h3>${x.desc?`<p>${esc(x.desc)}</p>`:""}<span>${x.ready?"Explorar →":"Ver →"}</span></a>`).join("");
+const PAGES=["inicio","analisis","metodologia",...SECS.map(x=>x.id)];
 function route(){
   const [h,sub]=location.hash.slice(1).split("/"),p=PAGES.includes(h)?h:"inicio";
   const i=p==="cultura"?DIMS.findIndex(x=>x.id===sub):-1;
@@ -465,13 +474,13 @@ function route(){
   $("v-list").hidden=i>=0;$("v-dim").hidden=i<0;
   const U=p==="territorios"?TERR.find(x=>x.id===sub):null;
   if(p==="territorios"){$("v-tl").hidden=!!U;$("v-td").hidden=!U;if(U)renderTd(U)}
-  const pg=["inicio","cultura","metodologia","territorios"].includes(p)?p:"pronto",sc=SECS.find(x=>x.id===p);
+  const pg=["inicio","analisis","cultura","metodologia","territorios"].includes(p)?p:"pronto",sc=SECS.find(x=>x.id===p);
   if(pg==="pronto"){$("pt").textContent=sc.name;$("pl").textContent=sc.desc||""}
-  ["inicio","cultura","metodologia","territorios","pronto"].forEach(n=>$("p-"+n).classList.toggle("on",n===pg));
+  ["inicio","analisis","cultura","metodologia","territorios","pronto"].forEach(n=>$("p-"+n).classList.toggle("on",n===pg));
   document.querySelectorAll("nav a").forEach(a=>{
-    if(a.getAttribute("href")==="#"+p)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
+    if(a.getAttribute("href")==="#"+(p==="inicio"||p==="metodologia"?p:"analisis"))a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
   });
-  document.title=(i>=0?DIMS[i].name+" · ":U?U.name+" · ":"")+(p==="inicio"?"":({cultura:"Cultura",metodologia:"Metodología"}[p]||sc.name)+" · ")+"Proyecto País";
+  document.title=(i>=0?DIMS[i].name+" · ":U?U.name+" · ":"")+(p==="inicio"?"":({analisis:"Análisis",cultura:"Cultura",metodologia:"Metodología"}[p]||sc.name)+" · ")+"Proyecto País";
   window.scrollTo(0,0);
   if(i>=0)$("ct").focus({preventScroll:true});
   if(U)$("tn").focus({preventScroll:true});
